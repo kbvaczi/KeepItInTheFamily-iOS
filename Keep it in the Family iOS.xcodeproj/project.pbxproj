@@ -14,9 +14,15 @@
 		BE1BF9CE1DA13E3E00BB1AC8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE1BF9CC1DA13E3E00BB1AC8 /* Main.storyboard */; };
 		BE1BF9D01DA13E3E00BB1AC8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE1BF9CF1DA13E3E00BB1AC8 /* Assets.xcassets */; };
 		BE1BF9D31DA13E3E00BB1AC8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE1BF9D11DA13E3E00BB1AC8 /* LaunchScreen.storyboard */; };
+		BE1BF9DB1DA13FB000BB1AC8 /* KITTFConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1BF9DA1DA13FB000BB1AC8 /* KITTFConnection.swift */; };
+		BE1BF9DD1DA13FB700BB1AC8 /* KIITFContacts.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1BF9DC1DA13FB700BB1AC8 /* KIITFContacts.swift */; };
+		BE1BF9DF1DA13FCB00BB1AC8 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1BF9DE1DA13FCB00BB1AC8 /* LoginViewController.swift */; };
+		F50A1E30605DE44FE27EA8FF /* Pods_Keep_it_in_the_Family_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33A5FCC82D408DC409CC15B2 /* Pods_Keep_it_in_the_Family_iOS.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		22A7739FEBE25D74A5184065 /* Pods-Keep it in the Family iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Keep it in the Family iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Keep it in the Family iOS/Pods-Keep it in the Family iOS.debug.xcconfig"; sourceTree = "<group>"; };
+		33A5FCC82D408DC409CC15B2 /* Pods_Keep_it_in_the_Family_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Keep_it_in_the_Family_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE1BF9C01DA13E3E00BB1AC8 /* Keep it in the Family iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Keep it in the Family iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE1BF9C31DA13E3E00BB1AC8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BE1BF9C61DA13E3E00BB1AC8 /* Keep_it_in_the_Family_iOS.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Keep_it_in_the_Family_iOS.xcdatamodel; sourceTree = "<group>"; };
@@ -26,6 +32,10 @@
 		BE1BF9CF1DA13E3E00BB1AC8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BE1BF9D21DA13E3E00BB1AC8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BE1BF9D41DA13E3E00BB1AC8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BE1BF9DA1DA13FB000BB1AC8 /* KITTFConnection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KITTFConnection.swift; sourceTree = "<group>"; };
+		BE1BF9DC1DA13FB700BB1AC8 /* KIITFContacts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KIITFContacts.swift; sourceTree = "<group>"; };
+		BE1BF9DE1DA13FCB00BB1AC8 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		DF47078004ABA0F8C901B022 /* Pods-Keep it in the Family iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Keep it in the Family iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-Keep it in the Family iOS/Pods-Keep it in the Family iOS.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,17 +43,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F50A1E30605DE44FE27EA8FF /* Pods_Keep_it_in_the_Family_iOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		67C51F056A677518B937BC9D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				22A7739FEBE25D74A5184065 /* Pods-Keep it in the Family iOS.debug.xcconfig */,
+				DF47078004ABA0F8C901B022 /* Pods-Keep it in the Family iOS.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		BE1BF9B71DA13E3E00BB1AC8 = {
 			isa = PBXGroup;
 			children = (
 				BE1BF9C21DA13E3E00BB1AC8 /* Keep it in the Family iOS */,
 				BE1BF9C11DA13E3E00BB1AC8 /* Products */,
+				67C51F056A677518B937BC9D /* Pods */,
+				CFEA87B0F0CAF88BA745981C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -58,7 +80,9 @@
 		BE1BF9C21DA13E3E00BB1AC8 /* Keep it in the Family iOS */ = {
 			isa = PBXGroup;
 			children = (
+				BE1BF9E21DA1527500BB1AC8 /* KIITF */,
 				BE1BF9C31DA13E3E00BB1AC8 /* AppDelegate.swift */,
+				BE1BF9DE1DA13FCB00BB1AC8 /* LoginViewController.swift */,
 				BE1BF9C81DA13E3E00BB1AC8 /* MasterViewController.swift */,
 				BE1BF9CA1DA13E3E00BB1AC8 /* DetailViewController.swift */,
 				BE1BF9CC1DA13E3E00BB1AC8 /* Main.storyboard */,
@@ -70,6 +94,23 @@
 			path = "Keep it in the Family iOS";
 			sourceTree = "<group>";
 		};
+		BE1BF9E21DA1527500BB1AC8 /* KIITF */ = {
+			isa = PBXGroup;
+			children = (
+				BE1BF9DC1DA13FB700BB1AC8 /* KIITFContacts.swift */,
+				BE1BF9DA1DA13FB000BB1AC8 /* KITTFConnection.swift */,
+			);
+			name = KIITF;
+			sourceTree = "<group>";
+		};
+		CFEA87B0F0CAF88BA745981C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				33A5FCC82D408DC409CC15B2 /* Pods_Keep_it_in_the_Family_iOS.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -77,9 +118,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BE1BF9D71DA13E3E00BB1AC8 /* Build configuration list for PBXNativeTarget "Keep it in the Family iOS" */;
 			buildPhases = (
+				4F98D15D3649977FD4B6BD32 /* [CP] Check Pods Manifest.lock */,
 				BE1BF9BC1DA13E3E00BB1AC8 /* Sources */,
 				BE1BF9BD1DA13E3E00BB1AC8 /* Frameworks */,
 				BE1BF9BE1DA13E3E00BB1AC8 /* Resources */,
+				7FE61A30573C31C57598A4FD /* [CP] Embed Pods Frameworks */,
+				69202D819077B101A3CDFA3C /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -137,13 +181,64 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		4F98D15D3649977FD4B6BD32 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		69202D819077B101A3CDFA3C /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Keep it in the Family iOS/Pods-Keep it in the Family iOS-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7FE61A30573C31C57598A4FD /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Keep it in the Family iOS/Pods-Keep it in the Family iOS-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		BE1BF9BC1DA13E3E00BB1AC8 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE1BF9DF1DA13FCB00BB1AC8 /* LoginViewController.swift in Sources */,
 				BE1BF9C71DA13E3E00BB1AC8 /* Keep_it_in_the_Family_iOS.xcdatamodeld in Sources */,
 				BE1BF9C41DA13E3E00BB1AC8 /* AppDelegate.swift in Sources */,
+				BE1BF9DD1DA13FB700BB1AC8 /* KIITFContacts.swift in Sources */,
+				BE1BF9DB1DA13FB000BB1AC8 /* KITTFConnection.swift in Sources */,
 				BE1BF9C91DA13E3E00BB1AC8 /* MasterViewController.swift in Sources */,
 				BE1BF9CB1DA13E3E00BB1AC8 /* DetailViewController.swift in Sources */,
 			);
@@ -189,6 +284,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -239,6 +335,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -266,7 +363,9 @@
 		};
 		BE1BF9D81DA13E3E00BB1AC8 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 22A7739FEBE25D74A5184065 /* Pods-Keep it in the Family iOS.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "Keep it in the Family iOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -278,7 +377,9 @@
 		};
 		BE1BF9D91DA13E3E00BB1AC8 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DF47078004ABA0F8C901B022 /* Pods-Keep it in the Family iOS.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "Keep it in the Family iOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -307,6 +408,7 @@
 				BE1BF9D91DA13E3E00BB1AC8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

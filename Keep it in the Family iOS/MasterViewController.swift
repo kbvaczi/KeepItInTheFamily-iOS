@@ -13,11 +13,18 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
 
     var detailViewController: DetailViewController? = nil
     var managedObjectContext: NSManagedObjectContext? = nil
-
+    
+    let connection = KIITFConnection()
+    var contacts: [KIITFContact]? = nil
+    
+    func showLoginScreen() {
+        performSegue(withIdentifier: "loginSegue", sender: nil)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+
         self.navigationItem.leftBarButtonItem = self.editButtonItem
 
         let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(insertNewObject(_:)))
@@ -25,6 +32,24 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         if let split = self.splitViewController {
             let controllers = split.viewControllers
             self.detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? DetailViewController
+        }
+                
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        guard connection.isUserLoggedIn() else {
+            showLoginScreen()
+            return
+        }
+        
+        connection.getContacts() { (contacts: [KIITFContact]?, isSuccessful: Bool) -> Void in
+            guard isSuccessful == true else {
+                print("oh noes")
+                self.showLoginScreen()
+                return
+            }
+            self.contacts = contacts
+            self.tableView.reloadData()
         }
     }
 
@@ -73,24 +98,35 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     // MARK: - Table View
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return self.fetchedResultsController.sections?.count ?? 0
+        return 1
+        //return self.fetchedResultsController.sections?.count ?? 0
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        guard let unwrappedContacts = contacts else {
+            return 0
+        }
+        return unwrappedContacts.count
+        /*
         let sectionInfo = self.fetchedResultsController.sections![section]
         return sectionInfo.numberOfObjects
+        */
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        let event = self.fetchedResultsController.object(at: indexPath)
-        self.configureCell(cell, withEvent: event)
+        //let event = self.fetchedResultsController.object(at: indexPath)
+        //self.configureCell(cell, withEvent: event)
+        if let unwrappedContacts = contacts {
+            cell.textLabel?.text = unwrappedContacts[indexPath.row].name
+        }
+        
         return cell
     }
 
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
-        return true
+        return false
     }
 
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
