@@ -146,8 +146,12 @@ class KIITFConnection {
                     continue
                 }
                 
-                let contactLastCommunicationDate: Date? = nil
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "yyyy-mm-dd"
+                let contactLastCommunicationDate = dateFormatter.date(from: contactLastCommunicationDateAsString)
+                
                 let contactCommunicationFrequency = KIITFContact.calculateCommunicationFrequency(contactCommunicationFrequencyInMinutes)
+                
                 let contact = KIITFContact(contactName, id: contactID, notes: contactNotes, communicationFrequency: contactCommunicationFrequency, lastCommunicationDate: contactLastCommunicationDate)
                 
                 contactsList.append(contact)
