@@ -13,12 +13,16 @@ import SwiftyJSON
 class KIITFConnection {
     
     static let loginFlagKey = "KIITFLoginFlag"
+    static let accountKey = "KIITFAccount"
     
     let rootURLString: String
     
     init(_ rootURL: String? = nil) {
         rootURLString = (rootURL == nil ? "https://www.keepitinthe.family" : rootURL!)
     }
+    
+    
+    // MARK - ACCOUNT FUNCTIONALITY 
     
     func performWithCSRFToken(_ urlString: String?, perform: @escaping (_ csrfToken: String) -> Void) {
         
@@ -78,7 +82,7 @@ class KIITFConnection {
                     print("request.response : \(response.response)")
                     print("request.result : \(response.result)")
                     
-                    self.setLoginFlag()
+                    self.setLoginFlag(email: email)
                     callback(true)
                     
                     /*if let data = response.result.value, let utf8Text = String(data: data, encoding: .utf8) {
@@ -89,12 +93,37 @@ class KIITFConnection {
         }
     }
     
-    func setLoginFlag() {
+    func logoutRequest(callback: @escaping (_ logoutSuccess: Bool) -> Void) {
+        
+        let logoutURLString = rootURLString + "/accounts/logout/"
+        
+        Alamofire.request(logoutURLString, method: .get)
+            .validate()
+            .responseData { response in
+                guard response.result.isSuccess else {
+                    print("error attempting to logout")
+                    callback(false)
+                    return
+                }
+                
+                print("request : \(response.request)")
+                print("request.response : \(response.response)")
+                print("request.result : \(response.result)")
+                
+                self.clearLoginFlag()
+                callback(true)
+        }
+        
+    }
+    
+    func setLoginFlag(email: String) {
         UserDefaults.standard.set(true, forKey: KIITFConnection.loginFlagKey)
+        UserDefaults.standard.set(email, forKey: KIITFConnection.accountKey)
     }
     
     func clearLoginFlag() {
         UserDefaults.standard.set(false, forKey: KIITFConnection.loginFlagKey)
+        UserDefaults.standard.set(nil, forKey: KIITFConnection.accountKey)
     }
     
     func isUserLoggedIn() -> Bool {
@@ -103,6 +132,16 @@ class KIITFConnection {
         }
         return loginFlag
     }
+    
+    func userAccountEmail() -> String? {
+        guard let accountEmail = UserDefaults.standard.value(forKey: KIITFConnection.accountKey) as? String else {
+            return nil
+        }
+        return accountEmail
+    }
+    
+    
+    // MARK - DATA RETRIEVAL
     
     func retrieveJSON(_ urlString: String, callback: @escaping (_ processedResponseJSON: JSON?, _ isSuccessful: Bool) -> Void) {
         print("executing retrieveJSON, URL: \(urlString)")

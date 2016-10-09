@@ -107,6 +107,10 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         }
         return unwrappedContacts.count
     }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return "Contacts"
+    }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ContactCell", for: indexPath)

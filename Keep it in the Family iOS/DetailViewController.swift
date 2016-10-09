@@ -14,7 +14,10 @@ class DetailViewController: UITableViewController {
     
     func configureView() {
         // Update the user interface for the detail item.
-        self.tableView.reloadData()
+        if let contact: KIITFContact = self.detailItem {
+            self.tableView.reloadData()
+            self.navigationItem.title = contact.name
+        }
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
