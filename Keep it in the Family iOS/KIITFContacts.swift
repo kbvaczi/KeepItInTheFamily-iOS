@@ -90,7 +90,7 @@ struct KIITFContact {
     }
 }
 
-enum CommunicationFrequency {
+enum CommunicationFrequency: String {
     case daily
     case weekly
     case biweekly

@@ -86,9 +86,9 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showDetail" {
             if let indexPath = self.tableView.indexPathForSelectedRow {
-            let object = self.fetchedResultsController.object(at: indexPath)
+                let contact = contacts?[indexPath.row]
                 let controller = (segue.destination as! UINavigationController).topViewController as! DetailViewController
-                controller.detailItem = object
+                controller.detailItem = contact
                 controller.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem
                 controller.navigationItem.leftItemsSupplementBackButton = true
             }
@@ -99,7 +99,6 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
-        //return self.fetchedResultsController.sections?.count ?? 0
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -107,18 +106,13 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
             return 0
         }
         return unwrappedContacts.count
-        /*
-        let sectionInfo = self.fetchedResultsController.sections![section]
-        return sectionInfo.numberOfObjects
-        */
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        //let event = self.fetchedResultsController.object(at: indexPath)
-        //self.configureCell(cell, withEvent: event)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ContactCell", for: indexPath)
         if let unwrappedContacts = contacts {
-            cell.textLabel?.text = unwrappedContacts[indexPath.row].name
+            let contact = unwrappedContacts[indexPath.row]
+            configureCell(cell: cell, contact: contact)
         }
         
         return cell
@@ -144,9 +138,13 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
             }
         }
     }
-
-    func configureCell(_ cell: UITableViewCell, withEvent event: Event) {
-        cell.textLabel!.text = event.timestamp!.description
+    
+    func configureCell(cell: UITableViewCell, contact: KIITFContact) {
+        cell.textLabel?.text = contact.name
+        let dateformatter = DateFormatter()
+        dateformatter.dateStyle = DateFormatter.Style.short
+        let lastCommunicationDateString = dateformatter.string(from: contact.lastCommunicationDate as Date)
+        cell.detailTextLabel?.text = "Last Contact: " + lastCommunicationDateString
     }
 
     // MARK: - Fetched results controller
@@ -206,8 +204,8 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
                 tableView.insertRows(at: [newIndexPath!], with: .fade)
             case .delete:
                 tableView.deleteRows(at: [indexPath!], with: .fade)
-            case .update:
-                self.configureCell(tableView.cellForRow(at: indexPath!)!, withEvent: anObject as! Event)
+            case .update: break
+            
             case .move:
                 tableView.moveRow(at: indexPath!, to: newIndexPath!)
         }
