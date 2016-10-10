@@ -43,6 +43,12 @@ struct KIITFContact {
     var communicationFrequency: CommunicationFrequency
     var lastCommunicationDate: Date
     
+    var nextCommunicationDate: Date {
+        get {
+            return (lastCommunicationDate + TimeInterval(communicationFrequencyInMinutes()))
+        }
+    }
+    
     init(_ name: String, id: String, notes: String?, communicationFrequency: CommunicationFrequency?, lastCommunicationDate: Date?) {
         self.name = name
         self.id = id

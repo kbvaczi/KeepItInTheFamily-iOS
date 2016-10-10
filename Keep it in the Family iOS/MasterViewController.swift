@@ -109,7 +109,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "Contacts"
+        return ""
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -147,8 +147,8 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         cell.textLabel?.text = contact.name
         let dateformatter = DateFormatter()
         dateformatter.dateStyle = DateFormatter.Style.short
-        let lastCommunicationDateString = dateformatter.string(from: contact.lastCommunicationDate as Date)
-        cell.detailTextLabel?.text = "Last Contact: " + lastCommunicationDateString
+        let nextCommunicationDateString = dateformatter.string(from: contact.nextCommunicationDate as Date)
+        cell.detailTextLabel?.text = "next check-in: " + nextCommunicationDateString
     }
 
     // MARK: - Fetched results controller

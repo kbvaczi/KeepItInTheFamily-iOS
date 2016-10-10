@@ -22,7 +22,7 @@ class KIITFConnection {
     }
     
     
-    // MARK - ACCOUNT FUNCTIONALITY 
+    // MARK - GENERAL COMMUNICATION FUNCTIONS
     
     func performWithCSRFToken(_ urlString: String?, perform: @escaping (_ csrfToken: String) -> Void) {
         
@@ -55,6 +55,26 @@ class KIITFConnection {
                 
         }
     }
+    
+    func retrieveJSON(_ urlString: String, callback: @escaping (_ processedResponseJSON: JSON?, _ isSuccessful: Bool) -> Void) {
+        print("executing retrieveJSON, URL: \(urlString)")
+        
+        Alamofire.request(urlString)
+            .validate()
+            .responseJSON { response in
+                guard response.result.isSuccess, let rawJSON = response.result.value as? NSDictionary else {
+                    print("error retrieving JSON from \(urlString)")
+                    //print("JSON Retrieved: \(response.result.value)")
+                    callback(nil, false)
+                    return
+                }
+                let processedJSON = JSON(rawJSON)
+                print("JSON Retrieved: \(processedJSON)")
+                callback(processedJSON, true)
+        }
+    }
+    
+    // MARK - ACCOUNT FUNCTIONALITY
     
     func loginRequest(email: String, password: String, callback: @escaping (_ loginSuccess: Bool) -> Void) {
         
@@ -141,28 +161,11 @@ class KIITFConnection {
     }
     
     
-    // MARK - DATA RETRIEVAL
-    
-    func retrieveJSON(_ urlString: String, callback: @escaping (_ processedResponseJSON: JSON?, _ isSuccessful: Bool) -> Void) {
-        print("executing retrieveJSON, URL: \(urlString)")
-        
-        Alamofire.request(urlString)
-            .validate()
-            .responseJSON { response in
-                guard response.result.isSuccess, let rawJSON = response.result.value as? NSDictionary else {
-                    print("error retrieving JSON from \(urlString)")
-                    //print("JSON Retrieved: \(response.result.value)")
-                    callback(nil, false)
-                    return
-                }
-                let processedJSON = JSON(rawJSON)
-                print("JSON Retrieved: \(processedJSON)")
-                callback(processedJSON, true)
-        }
-    }
-    
+    // MARK - CONTACTS
+
     func getContacts(callback: @escaping (_ contactList: [KIITFContact]?, _ isSuccessful: Bool) -> Void) {
-        print("Executing getContactJSON()")
+        
+        print("Executing getContacts()")
         
         let contactsURLString = rootURLString + "/contacts"
         
@@ -196,6 +199,7 @@ class KIITFConnection {
                 contactsList.append(contact)
             }
             
+            print("contacts received:")
             for contact in contactsList {
                 print(contact.name)
             }
@@ -203,6 +207,45 @@ class KIITFConnection {
             callback(contactsList, true)
         }
         
+    }
+    
+    func createContact(contact: KIITFContact, callback: @escaping (_ requestSuccess: Bool) -> Void) {
+        
+        print("Executing createContact()")
+        
+        let createContactURLString = rootURLString + "/contacts"
+        
+        performWithCSRFToken(createContactURLString){ (csrfToken: String) -> Void in
+            
+            let myParameters: [String: Any] = [
+                "name": contact.name,
+                "notes": contact.notes,
+                "communication_frequency": contact.communicationFrequency,
+                "last_communication": contact.lastCommunicationDate,
+                "csrfmiddlewaretoken": csrfToken
+            ]
+            
+            Alamofire.request(createContactURLString, method: .post, parameters: myParameters, encoding: URLEncoding.default, headers: ["referer": createContactURLString])
+                .validate()
+                .responseData { response in
+                    guard response.result.isSuccess else {
+                        print("error creating contact \(contact.name)")
+                        callback(false)
+                        return
+                    }
+                    
+                    print("request : \(response.request)")
+                    print("request.response : \(response.response)")
+                    print("request.result : \(response.result)")
+                    
+                    callback(true)
+                    
+                    /*if let data = response.result.value, let utf8Text = String(data: data, encoding: .utf8) {
+                     print("Data: \(utf8Text)")
+                     }*/
+            }
+            
+        }
     }
 
 }
