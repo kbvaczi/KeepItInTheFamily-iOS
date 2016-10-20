@@ -9,9 +9,9 @@
 import UIKit
 import CoreData
 
-class MasterViewController: UITableViewController, NSFetchedResultsControllerDelegate {
+class ContactsViewController: UITableViewController, NSFetchedResultsControllerDelegate {
 
-    var detailViewController: DetailViewController? = nil
+    var detailViewController: ShowContactViewController? = nil
     var managedObjectContext: NSManagedObjectContext? = nil
     
     let connection = KIITFConnection()
@@ -31,7 +31,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         self.navigationItem.rightBarButtonItem = addButton
         if let split = self.splitViewController {
             let controllers = split.viewControllers
-            self.detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? DetailViewController
+            self.detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? ShowContactViewController
         }
                 
     }
@@ -87,7 +87,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         if segue.identifier == "showDetail" {
             if let indexPath = self.tableView.indexPathForSelectedRow {
                 let contact = contacts?[indexPath.row]
-                let controller = (segue.destination as! UINavigationController).topViewController as! DetailViewController
+                let controller = (segue.destination as! UINavigationController).topViewController as! ShowContactViewController
                 controller.detailItem = contact
                 controller.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem
                 controller.navigationItem.leftItemsSupplementBackButton = true
@@ -145,9 +145,9 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     
     func configureCell(cell: UITableViewCell, contact: KIITFContact) {
         cell.textLabel?.text = contact.name
-        let dateformatter = DateFormatter()
-        dateformatter.dateStyle = DateFormatter.Style.short
-        let nextCommunicationDateString = dateformatter.string(from: contact.nextCommunicationDate as Date)
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-mm-dd"
+        let nextCommunicationDateString = dateFormatter.string(from: contact.nextCommunicationDate as Date)
         cell.detailTextLabel?.text = "next check-in: " + nextCommunicationDateString
     }
 

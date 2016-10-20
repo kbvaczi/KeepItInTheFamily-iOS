@@ -9,15 +9,21 @@
 /* Begin PBXBuildFile section */
 		BE1BF9C41DA13E3E00BB1AC8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1BF9C31DA13E3E00BB1AC8 /* AppDelegate.swift */; };
 		BE1BF9C71DA13E3E00BB1AC8 /* Keep_it_in_the_Family_iOS.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BE1BF9C51DA13E3E00BB1AC8 /* Keep_it_in_the_Family_iOS.xcdatamodeld */; };
-		BE1BF9C91DA13E3E00BB1AC8 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1BF9C81DA13E3E00BB1AC8 /* MasterViewController.swift */; };
-		BE1BF9CB1DA13E3E00BB1AC8 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1BF9CA1DA13E3E00BB1AC8 /* DetailViewController.swift */; };
+		BE1BF9C91DA13E3E00BB1AC8 /* ContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1BF9C81DA13E3E00BB1AC8 /* ContactsViewController.swift */; };
+		BE1BF9CB1DA13E3E00BB1AC8 /* ShowContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1BF9CA1DA13E3E00BB1AC8 /* ShowContactViewController.swift */; };
 		BE1BF9CE1DA13E3E00BB1AC8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE1BF9CC1DA13E3E00BB1AC8 /* Main.storyboard */; };
 		BE1BF9D01DA13E3E00BB1AC8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE1BF9CF1DA13E3E00BB1AC8 /* Assets.xcassets */; };
 		BE1BF9D31DA13E3E00BB1AC8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE1BF9D11DA13E3E00BB1AC8 /* LaunchScreen.storyboard */; };
 		BE1BF9DB1DA13FB000BB1AC8 /* KITTFConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1BF9DA1DA13FB000BB1AC8 /* KITTFConnection.swift */; };
 		BE1BF9DD1DA13FB700BB1AC8 /* KIITFContacts.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1BF9DC1DA13FB700BB1AC8 /* KIITFContacts.swift */; };
 		BE1BF9DF1DA13FCB00BB1AC8 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1BF9DE1DA13FCB00BB1AC8 /* LoginViewController.swift */; };
+		BE82CD1A1DAC59C20098FEBB /* TextEditTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE82CD191DAC59C20098FEBB /* TextEditTableViewCell.swift */; };
+		BE82CD201DAC71A20098FEBB /* DatePickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE82CD1F1DAC71A20098FEBB /* DatePickerTableViewCell.swift */; };
+		BE82CD221DB112AA0098FEBB /* MultiSelectTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE82CD211DB112AA0098FEBB /* MultiSelectTableViewCell.swift */; };
+		BE82CD241DB1139B0098FEBB /* EditAttributeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE82CD231DB1139B0098FEBB /* EditAttributeTableViewController.swift */; };
+		BE82CD261DB1176D0098FEBB /* TextViewEditTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE82CD251DB1176D0098FEBB /* TextViewEditTableViewCell.swift */; };
 		BE99A0C81DAA913B00385A77 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE99A0C71DAA913B00385A77 /* AccountViewController.swift */; };
+		BE99A0CA1DAC505E00385A77 /* EditContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE99A0C91DAC505E00385A77 /* EditContactViewController.swift */; };
 		F50A1E30605DE44FE27EA8FF /* Pods_Keep_it_in_the_Family_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33A5FCC82D408DC409CC15B2 /* Pods_Keep_it_in_the_Family_iOS.framework */; };
 /* End PBXBuildFile section */
 
@@ -27,8 +33,8 @@
 		BE1BF9C01DA13E3E00BB1AC8 /* Keep it in the Family iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Keep it in the Family iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE1BF9C31DA13E3E00BB1AC8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BE1BF9C61DA13E3E00BB1AC8 /* Keep_it_in_the_Family_iOS.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Keep_it_in_the_Family_iOS.xcdatamodel; sourceTree = "<group>"; };
-		BE1BF9C81DA13E3E00BB1AC8 /* MasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
-		BE1BF9CA1DA13E3E00BB1AC8 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		BE1BF9C81DA13E3E00BB1AC8 /* ContactsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsViewController.swift; sourceTree = "<group>"; };
+		BE1BF9CA1DA13E3E00BB1AC8 /* ShowContactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowContactViewController.swift; sourceTree = "<group>"; };
 		BE1BF9CD1DA13E3E00BB1AC8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		BE1BF9CF1DA13E3E00BB1AC8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BE1BF9D21DA13E3E00BB1AC8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -36,7 +42,13 @@
 		BE1BF9DA1DA13FB000BB1AC8 /* KITTFConnection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KITTFConnection.swift; sourceTree = "<group>"; };
 		BE1BF9DC1DA13FB700BB1AC8 /* KIITFContacts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KIITFContacts.swift; sourceTree = "<group>"; };
 		BE1BF9DE1DA13FCB00BB1AC8 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		BE82CD191DAC59C20098FEBB /* TextEditTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextEditTableViewCell.swift; sourceTree = "<group>"; };
+		BE82CD1F1DAC71A20098FEBB /* DatePickerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerTableViewCell.swift; sourceTree = "<group>"; };
+		BE82CD211DB112AA0098FEBB /* MultiSelectTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiSelectTableViewCell.swift; sourceTree = "<group>"; };
+		BE82CD231DB1139B0098FEBB /* EditAttributeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditAttributeTableViewController.swift; sourceTree = "<group>"; };
+		BE82CD251DB1176D0098FEBB /* TextViewEditTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextViewEditTableViewCell.swift; sourceTree = "<group>"; };
 		BE99A0C71DAA913B00385A77 /* AccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
+		BE99A0C91DAC505E00385A77 /* EditContactViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditContactViewController.swift; sourceTree = "<group>"; };
 		DF47078004ABA0F8C901B022 /* Pods-Keep it in the Family iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Keep it in the Family iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-Keep it in the Family iOS/Pods-Keep it in the Family iOS.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -82,13 +94,10 @@
 		BE1BF9C21DA13E3E00BB1AC8 /* Keep it in the Family iOS */ = {
 			isa = PBXGroup;
 			children = (
-				BE1BF9E21DA1527500BB1AC8 /* KIITF */,
 				BE1BF9C31DA13E3E00BB1AC8 /* AppDelegate.swift */,
-				BE1BF9DE1DA13FCB00BB1AC8 /* LoginViewController.swift */,
-				BE1BF9C81DA13E3E00BB1AC8 /* MasterViewController.swift */,
-				BE1BF9CA1DA13E3E00BB1AC8 /* DetailViewController.swift */,
 				BE1BF9CC1DA13E3E00BB1AC8 /* Main.storyboard */,
-				BE99A0C71DAA913B00385A77 /* AccountViewController.swift */,
+				BE1BF9E21DA1527500BB1AC8 /* KIITF */,
+				BE82CD1B1DAC601E0098FEBB /* Views */,
 				BE1BF9CF1DA13E3E00BB1AC8 /* Assets.xcassets */,
 				BE1BF9D11DA13E3E00BB1AC8 /* LaunchScreen.storyboard */,
 				BE1BF9D41DA13E3E00BB1AC8 /* Info.plist */,
@@ -104,6 +113,47 @@
 				BE1BF9DA1DA13FB000BB1AC8 /* KITTFConnection.swift */,
 			);
 			name = KIITF;
+			sourceTree = "<group>";
+		};
+		BE82CD1B1DAC601E0098FEBB /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				BE82CD1D1DAC603C0098FEBB /* Account */,
+				BE82CD1C1DAC60250098FEBB /* Contacts */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		BE82CD1C1DAC60250098FEBB /* Contacts */ = {
+			isa = PBXGroup;
+			children = (
+				BE1BF9C81DA13E3E00BB1AC8 /* ContactsViewController.swift */,
+				BE1BF9CA1DA13E3E00BB1AC8 /* ShowContactViewController.swift */,
+				BE82CD1E1DAC604A0098FEBB /* Edit */,
+			);
+			name = Contacts;
+			sourceTree = "<group>";
+		};
+		BE82CD1D1DAC603C0098FEBB /* Account */ = {
+			isa = PBXGroup;
+			children = (
+				BE99A0C71DAA913B00385A77 /* AccountViewController.swift */,
+				BE1BF9DE1DA13FCB00BB1AC8 /* LoginViewController.swift */,
+			);
+			name = Account;
+			sourceTree = "<group>";
+		};
+		BE82CD1E1DAC604A0098FEBB /* Edit */ = {
+			isa = PBXGroup;
+			children = (
+				BE99A0C91DAC505E00385A77 /* EditContactViewController.swift */,
+				BE82CD231DB1139B0098FEBB /* EditAttributeTableViewController.swift */,
+				BE82CD211DB112AA0098FEBB /* MultiSelectTableViewCell.swift */,
+				BE82CD191DAC59C20098FEBB /* TextEditTableViewCell.swift */,
+				BE82CD251DB1176D0098FEBB /* TextViewEditTableViewCell.swift */,
+				BE82CD1F1DAC71A20098FEBB /* DatePickerTableViewCell.swift */,
+			);
+			name = Edit;
 			sourceTree = "<group>";
 		};
 		CFEA87B0F0CAF88BA745981C /* Frameworks */ = {
@@ -240,11 +290,17 @@
 				BE1BF9DF1DA13FCB00BB1AC8 /* LoginViewController.swift in Sources */,
 				BE1BF9C71DA13E3E00BB1AC8 /* Keep_it_in_the_Family_iOS.xcdatamodeld in Sources */,
 				BE1BF9C41DA13E3E00BB1AC8 /* AppDelegate.swift in Sources */,
+				BE82CD201DAC71A20098FEBB /* DatePickerTableViewCell.swift in Sources */,
+				BE82CD241DB1139B0098FEBB /* EditAttributeTableViewController.swift in Sources */,
+				BE82CD261DB1176D0098FEBB /* TextViewEditTableViewCell.swift in Sources */,
 				BE1BF9DD1DA13FB700BB1AC8 /* KIITFContacts.swift in Sources */,
+				BE82CD1A1DAC59C20098FEBB /* TextEditTableViewCell.swift in Sources */,
 				BE1BF9DB1DA13FB000BB1AC8 /* KITTFConnection.swift in Sources */,
-				BE1BF9C91DA13E3E00BB1AC8 /* MasterViewController.swift in Sources */,
+				BE82CD221DB112AA0098FEBB /* MultiSelectTableViewCell.swift in Sources */,
+				BE1BF9C91DA13E3E00BB1AC8 /* ContactsViewController.swift in Sources */,
 				BE99A0C81DAA913B00385A77 /* AccountViewController.swift in Sources */,
-				BE1BF9CB1DA13E3E00BB1AC8 /* DetailViewController.swift in Sources */,
+				BE1BF9CB1DA13E3E00BB1AC8 /* ShowContactViewController.swift in Sources */,
+				BE99A0CA1DAC505E00385A77 /* EditContactViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

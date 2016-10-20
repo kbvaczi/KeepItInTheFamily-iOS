@@ -26,7 +26,8 @@ class KIITFConnection {
     
     func performWithCSRFToken(_ urlString: String?, perform: @escaping (_ csrfToken: String) -> Void) {
         
-        let csrfURLString = (urlString == nil ? rootURLString + "/accounts/login/" : urlString!)
+        let csrfURLString = urlString ?? rootURLString + "/accounts/login/"
+        print(csrfURLString)
         
         Alamofire.request(csrfURLString)
             .validate()
@@ -35,24 +36,28 @@ class KIITFConnection {
                     print("error during csrf request")
                     return
                 }
-                if
-                    let headerFields = response.response?.allHeaderFields as? [String: String],
-                    let URL = response.request?.url
-                {
-                    let cookies = HTTPCookie.cookies(withResponseHeaderFields: headerFields, for: URL)
-                    for cookie in cookies {
-                        guard cookie.name == "csrftoken" else {
-                            return
-                        }
-                        let csrfToken = cookie.value
-                        perform(csrfToken)
-                    }
+                guard   let headerFields = response.response?.allHeaderFields as? [String: String],
+                        let URL = response.request?.url else {
+                    print("error setting header fields")
+                    return
                 }
-                
-                print("request : \(response.request)")
-                print("request.response : \(response.response)")
-                print("request.result : \(response.result)")
-                
+                let cookies = HTTPCookie.cookies(withResponseHeaderFields: headerFields, for: URL)
+                guard cookies.count > 0 else {
+                    print("no cookies retrieved")
+                    return
+                }
+                for cookie in cookies {
+                    guard cookie.name == "csrftoken" else {
+                        print("no CSRF token retrieved")
+                        return
+                    }
+                    let csrfToken = cookie.value
+                    print("retrieved CSRF Token: ", csrfToken)
+                    perform(csrfToken)
+                }
+                //print("request : \(response.request)")
+                //print("request.response : \(response.response)")
+                //print("request.result : \(response.result)")
         }
     }
     
@@ -239,12 +244,59 @@ class KIITFConnection {
                     print("request.result : \(response.result)")
                     
                     callback(true)
-                    
                     /*if let data = response.result.value, let utf8Text = String(data: data, encoding: .utf8) {
                      print("Data: \(utf8Text)")
                      }*/
             }
             
+        }
+    }
+    
+    func updateContact(contact: KIITFContact, callback: @escaping (_ requestSuccess: Bool) -> Void) {
+        
+        print("Executing updateContact()")
+        
+        let updateContactURLString = rootURLString + "/contacts/" + contact.id + "/"
+        let crsfURLString = rootURLString
+        
+        print(updateContactURLString)
+        
+        performWithCSRFToken(crsfURLString){ (csrfToken: String) -> Void in
+            
+            print("performing update w/ CSRF Token")
+            
+            let dateformatter = DateFormatter()
+            dateformatter.dateFormat = "yyyy-mm-dd"
+            let lastCommunicationDateString = dateformatter.string(from: contact.lastCommunicationDate)
+            
+            let myParameters: [String: Any] = [
+                "name": contact.name,
+                "notes": contact.notes,
+                "communication_frequency": contact.communicationFrequency.inMinutes,
+                "last_communication": lastCommunicationDateString,
+                "csrfmiddlewaretoken": csrfToken
+            ]
+            
+            print(myParameters)
+            
+            Alamofire.request(updateContactURLString, method: .patch, parameters: myParameters, encoding: URLEncoding.default, headers: ["referer": crsfURLString, "origin": crsfURLString, "x-csrftoken": csrfToken])
+                .validate()
+                .responseData { response in
+                    
+                    print("request.result.debugdescription : \(response.debugDescription)")
+                    
+                    if let data = response.result.value, let utf8Text = String(data: data, encoding: .utf8) {
+                        print("Data: \(utf8Text)")
+                    }
+                    
+                    guard response.result.isSuccess else {
+                        print("error editing contact \(contact.name)")
+                        callback(false)
+                        return
+                    }
+                    
+                    callback(true)
+            }
         }
     }
 

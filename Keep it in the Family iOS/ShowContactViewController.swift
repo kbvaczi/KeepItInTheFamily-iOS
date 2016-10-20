@@ -8,9 +8,13 @@
 
 import UIKit
 
-class DetailViewController: UITableViewController {
+class ShowContactViewController: UITableViewController {
 
-    let sections = SectionInformation()
+    let sections = KIITFContactSectionInfo()
+    
+    @IBAction func editContact(_ sender: AnyObject) {
+        performSegue(withIdentifier: "editContactFromShowSegue", sender: nil)
+    }
     
     func configureView() {
         // Update the user interface for the detail item.
@@ -41,9 +45,9 @@ class DetailViewController: UITableViewController {
             case sections.sectionNumberForName(name: "Communication Frequency"):
                 cell.textLabel?.text = contact.communicationFrequency.rawValue.capitalized
             case sections.sectionNumberForName(name: "Last Contact"):
-                let dateformatter = DateFormatter()
-                dateformatter.dateStyle = DateFormatter.Style.long
-                let lastCommunicationDateString = dateformatter.string(from: contact.lastCommunicationDate as Date)
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "yyyy-mm-dd"
+                let lastCommunicationDateString = dateFormatter.string(from: contact.lastCommunicationDate)
                 cell.textLabel?.text = lastCommunicationDateString
             case sections.sectionNumberForName(name: "Notes"):
                 cell.textLabel?.text = contact.notes
@@ -61,7 +65,8 @@ class DetailViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 140
     }
 
     override func didReceiveMemoryWarning() {
@@ -75,13 +80,22 @@ class DetailViewController: UITableViewController {
             self.configureView()
         }
     }
-}
-
-class SectionInformation {
-    let names = ["Name", "Communication Frequency", "Last Contact", "Notes"]
     
-    func sectionNumberForName(name: String) -> Int {
-        return names.index(of: name) ?? 99
+    // MARK: - Segues
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "editContactFromShowSegue" {
+            if let contact: KIITFContact = self.detailItem {
+                let destination = segue.destination as! UINavigationController
+                let controller = destination.childViewControllers.first as! EditContactViewController
+                controller.contact = contact
+                //controller.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem
+                //controller.navigationItem.leftItemsSupplementBackButton = true
+                let backItem = UIBarButtonItem()
+                backItem.title = "Cancel"
+                navigationItem.backBarButtonItem = backItem
+            }
+        }
     }
 }
 

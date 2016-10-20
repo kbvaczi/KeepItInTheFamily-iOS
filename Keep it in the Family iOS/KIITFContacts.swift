@@ -8,33 +8,6 @@
 
 import Foundation
 
-/*
-struct KIITFContactList {
-    public var contacts: [KIITFContact] = []
-}
-
-extension KIITFContactList : Sequence {
-    
-    func generate() -> IteratorProtocol {
-        return KIITFContactListGenerator(contactList: self)
-    }
-    
-    struct KIITFContactListGenerator : IteratorProtocol {
-        var contactList: KIITFContactList
-        var index = 0
-        
-        init(contactList: KIITFContactList) {
-            self.contactList = contactList
-        }
-        
-        mutating func next() -> KIITFContact? {
-            return index < contactList.contacts.count ? contactList.contacts[index + 1] : nil
-        }
-    }
- 
-}
-*/
-
 struct KIITFContact {
     
     var name: String
@@ -97,6 +70,7 @@ struct KIITFContact {
 }
 
 enum CommunicationFrequency: String {
+    
     case daily
     case weekly
     case biweekly
@@ -104,4 +78,46 @@ enum CommunicationFrequency: String {
     case quarterly
     case biannually
     case yearly
+    
+    static let allValues = [daily, weekly, biweekly, monthly, quarterly, biannually, yearly]
+    static let allValuesRaw = ["Daily", "Weekly", "Biweekly", "Monthly", "Quarterly", "Biannually", "Yearly"]
+    
+    static var optionsForSelect: [[String:Any]] {
+        get {
+            var options: [[String: Any]] = []
+            for value in self.allValues {
+                options.append(["label": value.rawValue, "value": value])
+            }
+            return options
+        }
+    }
+    
+    var inMinutes: Int {
+        get {
+            switch self {
+            case .daily:
+                return 1440
+            case .weekly:
+                return 10080
+            case .biweekly:
+                return 20160
+            case .monthly:
+                return 43200
+            case .quarterly:
+                return 132480
+            case .biannually:
+                return 262800
+            case .yearly:
+                return 525600
+            }
+        }
+    }
+}
+
+class KIITFContactSectionInfo {
+    let names = ["Name", "Communication Frequency", "Last Contact", "Notes"]
+    
+    func sectionNumberForName(name: String) -> Int {
+        return names.index(of: name) ?? 99
+    }
 }
