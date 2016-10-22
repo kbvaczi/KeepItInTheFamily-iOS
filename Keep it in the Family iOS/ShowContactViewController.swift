@@ -9,16 +9,21 @@
 import UIKit
 
 class ShowContactViewController: UITableViewController {
-
-    let sections = KIITFContactSectionInfo()
     
     @IBAction func editContact(_ sender: AnyObject) {
-        performSegue(withIdentifier: "editContactFromShowSegue", sender: nil)
+        performSegue(withIdentifier: "editContactFormSegue", sender: nil)
+    }
+    
+    let sections = KIITFContactSectionInfo()
+    
+    var contact: KIITFContact? {
+        didSet {
+            self.configureView()
+        }
     }
     
     func configureView() {
-        // Update the user interface for the detail item.
-        if let contact: KIITFContact = self.detailItem {
+        if let contact: KIITFContact = self.contact {
             self.tableView.reloadData()
             self.navigationItem.title = contact.name
         }
@@ -38,7 +43,7 @@ class ShowContactViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        if let contact: KIITFContact = self.detailItem {
+        if let contact: KIITFContact = self.contact {
             switch indexPath.section {
             case sections.sectionNumberForName(name: "Name"):
                 cell.textLabel?.text = contact.name
@@ -46,7 +51,7 @@ class ShowContactViewController: UITableViewController {
                 cell.textLabel?.text = contact.communicationFrequency.rawValue.capitalized
             case sections.sectionNumberForName(name: "Last Contact"):
                 let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "yyyy-mm-dd"
+                dateFormatter.dateStyle = DateFormatter.Style.medium
                 let lastCommunicationDateString = dateFormatter.string(from: contact.lastCommunicationDate)
                 cell.textLabel?.text = lastCommunicationDateString
             case sections.sectionNumberForName(name: "Notes"):
@@ -69,32 +74,20 @@ class ShowContactViewController: UITableViewController {
         tableView.estimatedRowHeight = 140
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-    var detailItem: KIITFContact? {
-        didSet {
-            // Update the view.
-            self.configureView()
-        }
-    }
-    
     // MARK: - Segues
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "editContactFromShowSegue" {
-            if let contact: KIITFContact = self.detailItem {
-                let destination = segue.destination as! UINavigationController
-                let controller = destination.childViewControllers.first as! EditContactViewController
-                controller.contact = contact
-                //controller.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem
-                //controller.navigationItem.leftItemsSupplementBackButton = true
-                let backItem = UIBarButtonItem()
-                backItem.title = "Cancel"
-                navigationItem.backBarButtonItem = backItem
+        if segue.identifier == "editContactFormSegue" {
+            guard let contactUnwrapped = self.contact else {
+                return
             }
+            let destinationNav = segue.destination as! UINavigationController
+            let destinationController = destinationNav.childViewControllers.first as! EditContactFormViewController
+            destinationController.configureView(contact: contactUnwrapped, sourceController: self)
+            let backItem = UIBarButtonItem()
+            backItem.title = "Cancel"
+            destinationController.navigationItem.backBarButtonItem = backItem
+            
         }
     }
 }

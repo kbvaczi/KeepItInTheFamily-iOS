@@ -17,13 +17,8 @@
 		BE1BF9DB1DA13FB000BB1AC8 /* KITTFConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1BF9DA1DA13FB000BB1AC8 /* KITTFConnection.swift */; };
 		BE1BF9DD1DA13FB700BB1AC8 /* KIITFContacts.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1BF9DC1DA13FB700BB1AC8 /* KIITFContacts.swift */; };
 		BE1BF9DF1DA13FCB00BB1AC8 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1BF9DE1DA13FCB00BB1AC8 /* LoginViewController.swift */; };
-		BE82CD1A1DAC59C20098FEBB /* TextEditTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE82CD191DAC59C20098FEBB /* TextEditTableViewCell.swift */; };
-		BE82CD201DAC71A20098FEBB /* DatePickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE82CD1F1DAC71A20098FEBB /* DatePickerTableViewCell.swift */; };
-		BE82CD221DB112AA0098FEBB /* MultiSelectTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE82CD211DB112AA0098FEBB /* MultiSelectTableViewCell.swift */; };
-		BE82CD241DB1139B0098FEBB /* EditAttributeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE82CD231DB1139B0098FEBB /* EditAttributeTableViewController.swift */; };
-		BE82CD261DB1176D0098FEBB /* TextViewEditTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE82CD251DB1176D0098FEBB /* TextViewEditTableViewCell.swift */; };
 		BE99A0C81DAA913B00385A77 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE99A0C71DAA913B00385A77 /* AccountViewController.swift */; };
-		BE99A0CA1DAC505E00385A77 /* EditContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE99A0C91DAC505E00385A77 /* EditContactViewController.swift */; };
+		BED94AF81DB98BD000CC29D0 /* EditContactFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED94AF71DB98BD000CC29D0 /* EditContactFormViewController.swift */; };
 		F50A1E30605DE44FE27EA8FF /* Pods_Keep_it_in_the_Family_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33A5FCC82D408DC409CC15B2 /* Pods_Keep_it_in_the_Family_iOS.framework */; };
 /* End PBXBuildFile section */
 
@@ -42,13 +37,8 @@
 		BE1BF9DA1DA13FB000BB1AC8 /* KITTFConnection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KITTFConnection.swift; sourceTree = "<group>"; };
 		BE1BF9DC1DA13FB700BB1AC8 /* KIITFContacts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KIITFContacts.swift; sourceTree = "<group>"; };
 		BE1BF9DE1DA13FCB00BB1AC8 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		BE82CD191DAC59C20098FEBB /* TextEditTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextEditTableViewCell.swift; sourceTree = "<group>"; };
-		BE82CD1F1DAC71A20098FEBB /* DatePickerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerTableViewCell.swift; sourceTree = "<group>"; };
-		BE82CD211DB112AA0098FEBB /* MultiSelectTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiSelectTableViewCell.swift; sourceTree = "<group>"; };
-		BE82CD231DB1139B0098FEBB /* EditAttributeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditAttributeTableViewController.swift; sourceTree = "<group>"; };
-		BE82CD251DB1176D0098FEBB /* TextViewEditTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextViewEditTableViewCell.swift; sourceTree = "<group>"; };
 		BE99A0C71DAA913B00385A77 /* AccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
-		BE99A0C91DAC505E00385A77 /* EditContactViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditContactViewController.swift; sourceTree = "<group>"; };
+		BED94AF71DB98BD000CC29D0 /* EditContactFormViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditContactFormViewController.swift; sourceTree = "<group>"; };
 		DF47078004ABA0F8C901B022 /* Pods-Keep it in the Family iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Keep it in the Family iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-Keep it in the Family iOS/Pods-Keep it in the Family iOS.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -129,7 +119,7 @@
 			children = (
 				BE1BF9C81DA13E3E00BB1AC8 /* ContactsViewController.swift */,
 				BE1BF9CA1DA13E3E00BB1AC8 /* ShowContactViewController.swift */,
-				BE82CD1E1DAC604A0098FEBB /* Edit */,
+				BED94AF71DB98BD000CC29D0 /* EditContactFormViewController.swift */,
 			);
 			name = Contacts;
 			sourceTree = "<group>";
@@ -141,19 +131,6 @@
 				BE1BF9DE1DA13FCB00BB1AC8 /* LoginViewController.swift */,
 			);
 			name = Account;
-			sourceTree = "<group>";
-		};
-		BE82CD1E1DAC604A0098FEBB /* Edit */ = {
-			isa = PBXGroup;
-			children = (
-				BE99A0C91DAC505E00385A77 /* EditContactViewController.swift */,
-				BE82CD231DB1139B0098FEBB /* EditAttributeTableViewController.swift */,
-				BE82CD211DB112AA0098FEBB /* MultiSelectTableViewCell.swift */,
-				BE82CD191DAC59C20098FEBB /* TextEditTableViewCell.swift */,
-				BE82CD251DB1176D0098FEBB /* TextViewEditTableViewCell.swift */,
-				BE82CD1F1DAC71A20098FEBB /* DatePickerTableViewCell.swift */,
-			);
-			name = Edit;
 			sourceTree = "<group>";
 		};
 		CFEA87B0F0CAF88BA745981C /* Frameworks */ = {
@@ -290,17 +267,12 @@
 				BE1BF9DF1DA13FCB00BB1AC8 /* LoginViewController.swift in Sources */,
 				BE1BF9C71DA13E3E00BB1AC8 /* Keep_it_in_the_Family_iOS.xcdatamodeld in Sources */,
 				BE1BF9C41DA13E3E00BB1AC8 /* AppDelegate.swift in Sources */,
-				BE82CD201DAC71A20098FEBB /* DatePickerTableViewCell.swift in Sources */,
-				BE82CD241DB1139B0098FEBB /* EditAttributeTableViewController.swift in Sources */,
-				BE82CD261DB1176D0098FEBB /* TextViewEditTableViewCell.swift in Sources */,
 				BE1BF9DD1DA13FB700BB1AC8 /* KIITFContacts.swift in Sources */,
-				BE82CD1A1DAC59C20098FEBB /* TextEditTableViewCell.swift in Sources */,
 				BE1BF9DB1DA13FB000BB1AC8 /* KITTFConnection.swift in Sources */,
-				BE82CD221DB112AA0098FEBB /* MultiSelectTableViewCell.swift in Sources */,
 				BE1BF9C91DA13E3E00BB1AC8 /* ContactsViewController.swift in Sources */,
 				BE99A0C81DAA913B00385A77 /* AccountViewController.swift in Sources */,
+				BED94AF81DB98BD000CC29D0 /* EditContactFormViewController.swift in Sources */,
 				BE1BF9CB1DA13E3E00BB1AC8 /* ShowContactViewController.swift in Sources */,
-				BE99A0CA1DAC505E00385A77 /* EditContactViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

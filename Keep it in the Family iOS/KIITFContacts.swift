@@ -18,7 +18,7 @@ struct KIITFContact {
     
     var nextCommunicationDate: Date {
         get {
-            return (lastCommunicationDate + TimeInterval(communicationFrequencyInMinutes()))
+            return (lastCommunicationDate + TimeInterval(self.communicationFrequency.inSeconds))
         }
     }
     
@@ -67,6 +67,7 @@ struct KIITFContact {
             return .yearly
         }
     }
+    
 }
 
 enum CommunicationFrequency: String {
@@ -110,6 +111,12 @@ enum CommunicationFrequency: String {
             case .yearly:
                 return 525600
             }
+        }
+    }
+    
+    var inSeconds: Int {
+        get {
+            return self.inMinutes * 60
         }
     }
 }

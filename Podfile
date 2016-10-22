@@ -8,6 +8,7 @@ target 'Keep it in the Family iOS' do
   # Pods for Keep it in the Family iOS
   pod 'Alamofire', '~> 4.0'
   pod 'Locksmith', '~> 3.0'
+  pod 'Eureka', '~> 2.0.0-beta.1'
   pod 'SwiftyJSON', '~> 3.1'
 
 end

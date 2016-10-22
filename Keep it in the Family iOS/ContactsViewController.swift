@@ -88,7 +88,7 @@ class ContactsViewController: UITableViewController, NSFetchedResultsControllerD
             if let indexPath = self.tableView.indexPathForSelectedRow {
                 let contact = contacts?[indexPath.row]
                 let controller = (segue.destination as! UINavigationController).topViewController as! ShowContactViewController
-                controller.detailItem = contact
+                controller.contact = contact
                 controller.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem
                 controller.navigationItem.leftItemsSupplementBackButton = true
             }
@@ -146,7 +146,7 @@ class ContactsViewController: UITableViewController, NSFetchedResultsControllerD
     func configureCell(cell: UITableViewCell, contact: KIITFContact) {
         cell.textLabel?.text = contact.name
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-mm-dd"
+        dateFormatter.dateStyle = DateFormatter.Style.medium
         let nextCommunicationDateString = dateFormatter.string(from: contact.nextCommunicationDate as Date)
         cell.detailTextLabel?.text = "next check-in: " + nextCommunicationDateString
     }

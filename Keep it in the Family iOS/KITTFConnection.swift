@@ -266,14 +266,14 @@ class KIITFConnection {
             print("performing update w/ CSRF Token")
             
             let dateformatter = DateFormatter()
-            dateformatter.dateFormat = "yyyy-mm-dd"
-            let lastCommunicationDateString = dateformatter.string(from: contact.lastCommunicationDate)
+            dateformatter.dateFormat = "YYYY-MM-dd"
+            let lastCommunicationDateStringFormatted = dateformatter.string(from: contact.lastCommunicationDate)
             
             let myParameters: [String: Any] = [
                 "name": contact.name,
                 "notes": contact.notes,
                 "communication_frequency": contact.communicationFrequency.inMinutes,
-                "last_communication": lastCommunicationDateString,
+                "last_communication": lastCommunicationDateStringFormatted,
                 "csrfmiddlewaretoken": csrfToken
             ]
             
