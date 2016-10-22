@@ -187,19 +187,21 @@ class KIITFConnection {
                         let contactID = contactJSON["id"].string,
                         let contactNotes = contactJSON["notes"].string,
                         let contactCommunicationFrequencyInMinutes = contactJSON["communication_frequency"].int,
-                        let contactLastCommunicationDateAsString = contactJSON["last_communication"].string
+                        let contactLastCommunicationDateAsString = contactJSON["last_communication"].string,
+                        let contactNextCommunicationDateAsString = contactJSON["next_communication"].string
                 else {
                     print("error getting contact data from JSON")
                     continue
                 }
                 
                 let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "yyyy-mm-dd"
+                dateFormatter.dateFormat = "YYYY-MM-dd"
                 let contactLastCommunicationDate = dateFormatter.date(from: contactLastCommunicationDateAsString)
+                let contactNextCommunicationDate = dateFormatter.date(from: contactNextCommunicationDateAsString)
                 
-                let contactCommunicationFrequency = KIITFContact.calculateCommunicationFrequency(contactCommunicationFrequencyInMinutes)
+                let contactCommunicationFrequency = CommunicationFrequency.frequencyFrom(minutes: contactCommunicationFrequencyInMinutes)
                 
-                let contact = KIITFContact(contactName, id: contactID, notes: contactNotes, communicationFrequency: contactCommunicationFrequency, lastCommunicationDate: contactLastCommunicationDate)
+                let contact = KIITFContact(contactName, id: contactID, notes: contactNotes, communicationFrequency: contactCommunicationFrequency, lastCommunicationDate: contactLastCommunicationDate, nextCommunicationDate: contactNextCommunicationDate)
                 
                 contactsList.append(contact)
             }
@@ -227,6 +229,7 @@ class KIITFConnection {
                 "notes": contact.notes,
                 "communication_frequency": contact.communicationFrequency,
                 "last_communication": contact.lastCommunicationDate,
+                "next_communication": contact.nextCommunicationDate,
                 "csrfmiddlewaretoken": csrfToken
             ]
             
@@ -267,13 +270,15 @@ class KIITFConnection {
             
             let dateformatter = DateFormatter()
             dateformatter.dateFormat = "YYYY-MM-dd"
-            let lastCommunicationDateStringFormatted = dateformatter.string(from: contact.lastCommunicationDate)
+            let lastCommunicationDateString = dateformatter.string(from: contact.lastCommunicationDate)
+            let nextCommunicationDateString = dateformatter.string(from: contact.nextCommunicationDate)
             
             let myParameters: [String: Any] = [
                 "name": contact.name,
                 "notes": contact.notes,
                 "communication_frequency": contact.communicationFrequency.inMinutes,
-                "last_communication": lastCommunicationDateStringFormatted,
+                "last_communication": lastCommunicationDateString,
+                "next_communication": nextCommunicationDateString,
                 "csrfmiddlewaretoken": csrfToken
             ]
             

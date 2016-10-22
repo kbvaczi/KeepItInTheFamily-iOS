@@ -145,10 +145,11 @@ class ContactsViewController: UITableViewController, NSFetchedResultsControllerD
     
     func configureCell(cell: UITableViewCell, contact: KIITFContact) {
         cell.textLabel?.text = contact.name
+        
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = DateFormatter.Style.medium
         let nextCommunicationDateString = dateFormatter.string(from: contact.nextCommunicationDate as Date)
-        cell.detailTextLabel?.text = "next check-in: " + nextCommunicationDateString
+        cell.detailTextLabel?.text = "next check-in: " + nextCommunicationDateString + " (" + contact.communicationFrequency.rawValue + ")"
     }
 
     // MARK: - Fetched results controller

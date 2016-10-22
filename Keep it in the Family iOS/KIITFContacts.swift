@@ -15,42 +15,59 @@ struct KIITFContact {
     var notes: String
     var communicationFrequency: CommunicationFrequency
     var lastCommunicationDate: Date
+    var nextCommunicationDate: Date
     
-    var nextCommunicationDate: Date {
+    var nextCommunicationDatePredicted: Date {
         get {
-            return (lastCommunicationDate + TimeInterval(self.communicationFrequency.inSeconds))
+            return (lastCommunicationDate + TimeInterval(communicationFrequency.inSeconds))
         }
     }
     
-    init(_ name: String, id: String, notes: String?, communicationFrequency: CommunicationFrequency?, lastCommunicationDate: Date?) {
+    init(_ name: String, id: String, notes: String? = nil, communicationFrequency: CommunicationFrequency? = nil, lastCommunicationDate: Date? = nil, nextCommunicationDate: Date? = nil) {
         self.name = name
         self.id = id
-        self.notes = (notes != nil ? notes! : "")
-        self.communicationFrequency = (communicationFrequency != nil ? communicationFrequency! : .monthly)
-        self.lastCommunicationDate = (lastCommunicationDate != nil ? lastCommunicationDate! : Date(timeIntervalSinceNow: 0))
+        self.notes = (notes ?? "")
+        
+        let communicationFrequencyToStore = (communicationFrequency ?? .monthly)
+        self.communicationFrequency = communicationFrequencyToStore
+        
+        let lastCommunicationDateToStore = (lastCommunicationDate ?? Date(timeIntervalSinceNow: 0))
+        self.lastCommunicationDate = lastCommunicationDateToStore
+        
+        let nextCommunicationDateToStore = nextCommunicationDate ?? (lastCommunicationDateToStore + TimeInterval(communicationFrequencyToStore.inSeconds))
+        self.nextCommunicationDate = nextCommunicationDateToStore
     }
+    
+}
 
-    public func communicationFrequencyInMinutes() -> Int {
-        switch communicationFrequency {
-        case .daily:
-            return 1440
-        case .weekly:
-            return 10080
-        case .biweekly:
-            return 20160
-        case .monthly:
-            return 43200
-        case .quarterly:
-            return 132480
-        case .biannually:
-            return 262800
-        case .yearly:
-            return 525600
+enum CommunicationFrequency: String {
+    
+    case daily = "Daily"
+    case weekly = "Weekly"
+    case biweekly = "Biweekly"
+    case monthly = "Monthly"
+    case quarterly = "Quarterly"
+    case biannually = "Biannually"
+    case yearly = "Yearly"
+    
+    static let allValues = [daily, weekly, biweekly, monthly, quarterly, biannually, yearly]
+    
+    static let defaultValue = monthly
+    
+    static var allValuesRaw: [String] {
+        get {
+            var valuesRaw: [String] = []
+            for value in allValues {
+                valuesRaw.append(value.rawValue)
+            }
+            return valuesRaw
         }
     }
     
-    static func calculateCommunicationFrequency(_ frequencyInMinutes: Int) -> CommunicationFrequency {
-        switch frequencyInMinutes {
+    //static let allValuesRaw = ["Daily", "Weekly", "Biweekly", "Monthly", "Quarterly", "Biannually", "Yearly"]
+    
+    static func frequencyFrom(minutes: Int) -> CommunicationFrequency {
+        switch minutes {
         case 1440:
             return .daily
         case 10080:
@@ -65,31 +82,6 @@ struct KIITFContact {
             return .biannually
         default:
             return .yearly
-        }
-    }
-    
-}
-
-enum CommunicationFrequency: String {
-    
-    case daily
-    case weekly
-    case biweekly
-    case monthly
-    case quarterly
-    case biannually
-    case yearly
-    
-    static let allValues = [daily, weekly, biweekly, monthly, quarterly, biannually, yearly]
-    static let allValuesRaw = ["Daily", "Weekly", "Biweekly", "Monthly", "Quarterly", "Biannually", "Yearly"]
-    
-    static var optionsForSelect: [[String:Any]] {
-        get {
-            var options: [[String: Any]] = []
-            for value in self.allValues {
-                options.append(["label": value.rawValue, "value": value])
-            }
-            return options
         }
     }
     
