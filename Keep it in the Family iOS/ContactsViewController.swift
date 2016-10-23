@@ -11,9 +11,6 @@ import CoreData
 
 class ContactsViewController: UITableViewController, NSFetchedResultsControllerDelegate {
 
-    var detailViewController: ShowContactViewController? = nil
-    var managedObjectContext: NSManagedObjectContext? = nil
-    
     let connection = KIITFConnection()
     var contacts: [KIITFContact]? = nil
     
@@ -24,14 +21,6 @@ class ContactsViewController: UITableViewController, NSFetchedResultsControllerD
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-
-        self.navigationItem.leftBarButtonItem = self.editButtonItem
-
-        if let split = self.splitViewController {
-            let controllers = split.viewControllers
-            self.detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? ShowContactViewController
-        }
-                
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -42,7 +31,6 @@ class ContactsViewController: UITableViewController, NSFetchedResultsControllerD
         
         connection.getContacts() { (contacts: [KIITFContact]?, isSuccessful: Bool) -> Void in
             guard isSuccessful == true else {
-                print("oh noes")
                 self.showLoginScreen()
                 return
             }
@@ -62,10 +50,10 @@ class ContactsViewController: UITableViewController, NSFetchedResultsControllerD
         if segue.identifier == "showDetail" {
             if let indexPath = self.tableView.indexPathForSelectedRow {
                 let contact = contacts?[indexPath.row]
-                let controller = (segue.destination as! UINavigationController).topViewController as! ShowContactViewController
-                controller.contact = contact
-                controller.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem
-                controller.navigationItem.leftItemsSupplementBackButton = true
+                let distinationController = (segue.destination as! UINavigationController).topViewController as! ShowContactViewController
+                distinationController.contact = contact
+                distinationController.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem
+                distinationController.navigationItem.leftItemsSupplementBackButton = true
             }
         }
     }
