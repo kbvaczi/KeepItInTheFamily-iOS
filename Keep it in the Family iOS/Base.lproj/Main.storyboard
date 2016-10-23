@@ -33,10 +33,10 @@
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" id="BJ6-N8-PAx">
-                                <rect key="frame" x="0.0" y="119.5" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="120" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="BJ6-N8-PAx" id="8fr-aN-Ijw">
-                                    <frame key="frameInset" width="375" height="43.5"/>
+                                    <frame key="frameInset" width="375" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -147,7 +147,7 @@
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ContactCell" textLabel="Arm-wq-HPj" detailTextLabel="bFS-iA-2Co" rowHeight="49" style="IBUITableViewCellStyleSubtitle" id="WCw-Qf-5nD">
-                                <rect key="frame" x="0.0" y="119.5" width="375" height="49"/>
+                                <rect key="frame" x="0.0" y="120" width="375" height="49"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WCw-Qf-5nD" id="37f-cq-3Eg">
                                     <frame key="frameInset" width="342" height="48"/>
@@ -186,11 +186,47 @@
                         <segue destination="Tph-O3-vL7" kind="popoverPresentation" identifier="loginSegue" popoverAnchorView="r7i-6Z-zg0" id="Oja-gv-bCa">
                             <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
                         </segue>
+                        <segue destination="CZK-S0-jHC" kind="presentation" identifier="newContactSegue" id="l2N-uF-zh3"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rux-fX-hf1" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="734" y="-778"/>
+        </scene>
+        <!--New Contact-->
+        <scene sceneID="PcS-1X-qGv">
+            <objects>
+                <viewController id="fUB-Cc-UYt" customClass="NewContactFormViewController" customModule="Keep_it_in_the_Family_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="64V-ce-hJQ"/>
+                        <viewControllerLayoutGuide type="bottom" id="DC8-WC-jWt"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="TLs-OR-x6S">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="New Contact" id="aon-6d-PAW"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="haN-4h-Nyo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2338" y="-779"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="7Eo-qm-iD0">
+            <objects>
+                <navigationController id="CZK-S0-jHC" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Fyx-qB-Boz">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="fUB-Cc-UYt" kind="relationship" relationship="rootViewController" id="gQb-se-ble"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9kb-fN-1sO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1554" y="-779"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="uNU-Dd-mi7">
@@ -276,7 +312,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NhG-7F-fls" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1502" y="-778"/>
+            <point key="canvasLocation" x="734" y="-1597"/>
         </scene>
         <!--Account-->
         <scene sceneID="u2U-M2-8zv">

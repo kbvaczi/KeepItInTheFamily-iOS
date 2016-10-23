@@ -14,6 +14,7 @@ class KIITFConnection {
     
     static let loginFlagKey = "KIITFLoginFlag"
     static let accountKey = "KIITFAccount"
+    static let serverDateFormat = "YYYY-MM-dd"
     
     let rootURLString: String
     
@@ -77,6 +78,18 @@ class KIITFConnection {
                 print("JSON Retrieved: \(processedJSON)")
                 callback(processedJSON, true)
         }
+    }
+    
+    func formatDateStringForServer(_ dateToFormat: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = KIITFConnection.serverDateFormat
+        return dateFormatter.string(from: dateToFormat)
+    }
+    
+    func dateFromJSONString(_ dateString: String) -> Date? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = KIITFConnection.serverDateFormat
+        return dateFormatter.date(from: dateString)
     }
     
     // MARK - ACCOUNT FUNCTIONALITY
@@ -194,11 +207,8 @@ class KIITFConnection {
                     continue
                 }
                 
-                let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "YYYY-MM-dd"
-                let contactLastCommunicationDate = dateFormatter.date(from: contactLastCommunicationDateAsString)
-                let contactNextCommunicationDate = dateFormatter.date(from: contactNextCommunicationDateAsString)
-                
+                let contactLastCommunicationDate = self.dateFromJSONString(contactLastCommunicationDateAsString)
+                let contactNextCommunicationDate = self.dateFromJSONString(contactNextCommunicationDateAsString)
                 let contactCommunicationFrequency = CommunicationFrequency.frequencyFrom(minutes: contactCommunicationFrequencyInMinutes)
                 
                 let contact = KIITFContact(contactName, id: contactID, notes: contactNotes, communicationFrequency: contactCommunicationFrequency, lastCommunicationDate: contactLastCommunicationDate, nextCommunicationDate: contactNextCommunicationDate)
@@ -220,20 +230,21 @@ class KIITFConnection {
         
         print("Executing createContact()")
         
-        let createContactURLString = rootURLString + "/contacts"
+        let createContactURLString = rootURLString + "/contacts/"
+        let crsfURLString = rootURLString
         
-        performWithCSRFToken(createContactURLString){ (csrfToken: String) -> Void in
+        performWithCSRFToken(crsfURLString){ (csrfToken: String) -> Void in
             
             let myParameters: [String: Any] = [
                 "name": contact.name,
                 "notes": contact.notes,
-                "communication_frequency": contact.communicationFrequency,
-                "last_communication": contact.lastCommunicationDate,
-                "next_communication": contact.nextCommunicationDate,
+                "communication_frequency": contact.communicationFrequency.inMinutes,
+                "last_communication": self.formatDateStringForServer(contact.lastCommunicationDate),
+                "next_communication": self.formatDateStringForServer(contact.nextCommunicationDate),
                 "csrfmiddlewaretoken": csrfToken
             ]
             
-            Alamofire.request(createContactURLString, method: .post, parameters: myParameters, encoding: URLEncoding.default, headers: ["referer": createContactURLString])
+            Alamofire.request(createContactURLString, method: .post, parameters: myParameters, encoding: URLEncoding.default, headers: ["referer": crsfURLString])
                 .validate()
                 .responseData { response in
                     guard response.result.isSuccess else {
@@ -246,10 +257,11 @@ class KIITFConnection {
                     print("request.response : \(response.response)")
                     print("request.result : \(response.result)")
                     
+                    if let data = response.result.value, let utf8Text = String(data: data, encoding: .utf8) {
+                        print("Data: \(utf8Text)")
+                    }
+                    
                     callback(true)
-                    /*if let data = response.result.value, let utf8Text = String(data: data, encoding: .utf8) {
-                     print("Data: \(utf8Text)")
-                     }*/
             }
             
         }
@@ -268,17 +280,12 @@ class KIITFConnection {
             
             print("performing update w/ CSRF Token")
             
-            let dateformatter = DateFormatter()
-            dateformatter.dateFormat = "YYYY-MM-dd"
-            let lastCommunicationDateString = dateformatter.string(from: contact.lastCommunicationDate)
-            let nextCommunicationDateString = dateformatter.string(from: contact.nextCommunicationDate)
-            
             let myParameters: [String: Any] = [
                 "name": contact.name,
                 "notes": contact.notes,
                 "communication_frequency": contact.communicationFrequency.inMinutes,
-                "last_communication": lastCommunicationDateString,
-                "next_communication": nextCommunicationDateString,
+                "last_communication": self.formatDateStringForServer(contact.lastCommunicationDate),
+                "next_communication": self.formatDateStringForServer(contact.nextCommunicationDate),
                 "csrfmiddlewaretoken": csrfToken
             ]
             

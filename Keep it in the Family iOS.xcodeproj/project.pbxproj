@@ -17,6 +17,8 @@
 		BE1BF9DB1DA13FB000BB1AC8 /* KITTFConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1BF9DA1DA13FB000BB1AC8 /* KITTFConnection.swift */; };
 		BE1BF9DD1DA13FB700BB1AC8 /* KIITFContacts.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1BF9DC1DA13FB700BB1AC8 /* KIITFContacts.swift */; };
 		BE1BF9DF1DA13FCB00BB1AC8 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1BF9DE1DA13FCB00BB1AC8 /* LoginViewController.swift */; };
+		BE475F821DBCE94900C2A62F /* ContactsFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE475F811DBCE94900C2A62F /* ContactsFormViewController.swift */; };
+		BE475F841DBCEA6000C2A62F /* NewContactFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE475F831DBCEA6000C2A62F /* NewContactFormViewController.swift */; };
 		BE99A0C81DAA913B00385A77 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE99A0C71DAA913B00385A77 /* AccountViewController.swift */; };
 		BED94AF81DB98BD000CC29D0 /* EditContactFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED94AF71DB98BD000CC29D0 /* EditContactFormViewController.swift */; };
 		F50A1E30605DE44FE27EA8FF /* Pods_Keep_it_in_the_Family_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33A5FCC82D408DC409CC15B2 /* Pods_Keep_it_in_the_Family_iOS.framework */; };
@@ -37,6 +39,8 @@
 		BE1BF9DA1DA13FB000BB1AC8 /* KITTFConnection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KITTFConnection.swift; sourceTree = "<group>"; };
 		BE1BF9DC1DA13FB700BB1AC8 /* KIITFContacts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KIITFContacts.swift; sourceTree = "<group>"; };
 		BE1BF9DE1DA13FCB00BB1AC8 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		BE475F811DBCE94900C2A62F /* ContactsFormViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactsFormViewController.swift; sourceTree = "<group>"; };
+		BE475F831DBCEA6000C2A62F /* NewContactFormViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewContactFormViewController.swift; sourceTree = "<group>"; };
 		BE99A0C71DAA913B00385A77 /* AccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
 		BED94AF71DB98BD000CC29D0 /* EditContactFormViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditContactFormViewController.swift; sourceTree = "<group>"; };
 		DF47078004ABA0F8C901B022 /* Pods-Keep it in the Family iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Keep it in the Family iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-Keep it in the Family iOS/Pods-Keep it in the Family iOS.release.xcconfig"; sourceTree = "<group>"; };
@@ -119,7 +123,9 @@
 			children = (
 				BE1BF9C81DA13E3E00BB1AC8 /* ContactsViewController.swift */,
 				BE1BF9CA1DA13E3E00BB1AC8 /* ShowContactViewController.swift */,
+				BE475F811DBCE94900C2A62F /* ContactsFormViewController.swift */,
 				BED94AF71DB98BD000CC29D0 /* EditContactFormViewController.swift */,
+				BE475F831DBCEA6000C2A62F /* NewContactFormViewController.swift */,
 			);
 			name = Contacts;
 			sourceTree = "<group>";
@@ -267,9 +273,11 @@
 				BE1BF9DF1DA13FCB00BB1AC8 /* LoginViewController.swift in Sources */,
 				BE1BF9C71DA13E3E00BB1AC8 /* Keep_it_in_the_Family_iOS.xcdatamodeld in Sources */,
 				BE1BF9C41DA13E3E00BB1AC8 /* AppDelegate.swift in Sources */,
+				BE475F841DBCEA6000C2A62F /* NewContactFormViewController.swift in Sources */,
 				BE1BF9DD1DA13FB700BB1AC8 /* KIITFContacts.swift in Sources */,
 				BE1BF9DB1DA13FB000BB1AC8 /* KITTFConnection.swift in Sources */,
 				BE1BF9C91DA13E3E00BB1AC8 /* ContactsViewController.swift in Sources */,
+				BE475F821DBCE94900C2A62F /* ContactsFormViewController.swift in Sources */,
 				BE99A0C81DAA913B00385A77 /* AccountViewController.swift in Sources */,
 				BED94AF81DB98BD000CC29D0 /* EditContactFormViewController.swift in Sources */,
 				BE1BF9CB1DA13E3E00BB1AC8 /* ShowContactViewController.swift in Sources */,

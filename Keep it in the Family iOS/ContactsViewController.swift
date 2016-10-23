@@ -13,14 +13,13 @@ class ContactsViewController: UITableViewController, NSFetchedResultsControllerD
 
     let connection = KIITFConnection()
     var contacts: [KIITFContact]? = nil
-    
-    func showLoginScreen() {
-        performSegue(withIdentifier: "loginSegue", sender: nil)
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        let rightBarButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(ContactsViewController.addContact))
+        self.navigationItem.rightBarButtonItem = rightBarButton
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -42,6 +41,14 @@ class ContactsViewController: UITableViewController, NSFetchedResultsControllerD
     override func viewWillAppear(_ animated: Bool) {
         self.clearsSelectionOnViewWillAppear = self.splitViewController!.isCollapsed
         super.viewWillAppear(animated)
+    }
+    
+    func addContact() {
+        performSegue(withIdentifier: "newContactSegue", sender: nil)
+    }
+    
+    func showLoginScreen() {
+        performSegue(withIdentifier: "loginSegue", sender: nil)
     }
 
     // MARK: - Segues

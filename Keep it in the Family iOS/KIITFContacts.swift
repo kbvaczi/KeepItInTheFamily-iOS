@@ -23,9 +23,9 @@ struct KIITFContact {
         }
     }
     
-    init(_ name: String, id: String, notes: String? = nil, communicationFrequency: CommunicationFrequency? = nil, lastCommunicationDate: Date? = nil, nextCommunicationDate: Date? = nil) {
-        self.name = name
-        self.id = id
+    init(_ name: String? = nil, id: String? = nil, notes: String? = nil, communicationFrequency: CommunicationFrequency? = nil, lastCommunicationDate: Date? = nil, nextCommunicationDate: Date? = nil) {
+        self.name = (name ?? "")
+        self.id = (id ?? "")
         self.notes = (notes ?? "")
         
         let communicationFrequencyToStore = (communicationFrequency ?? .monthly)
