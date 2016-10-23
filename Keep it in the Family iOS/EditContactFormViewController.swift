@@ -42,14 +42,9 @@ class EditContactFormViewController: FormViewController {
         super.viewDidLoad()
         configureForm()
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
     
     func configureForm() {
         let errorColor =  UIColor(red: 255, green: 0, blue: 0, alpha: 0.5)
-        
         
         form = Section("")
             <<< TextRow("Name"){ row in
@@ -121,18 +116,6 @@ class EditContactFormViewController: FormViewController {
                 }.onChange { [weak self] row in
                     self?.contact?.notes = row.value ?? ""
         }
-    }
-    
-    func formValidationErrors() -> [String] {
-        var validationErrors: [String] = []
-        for row in form.allRows {
-            if !row.isValid {
-                for error in row.validationErrors {
-                    validationErrors.append(error.msg)
-                }
-            }
-        }
-        return validationErrors
     }
     
     func formIsValid() -> Bool {
