@@ -311,5 +311,47 @@ class KIITFConnection {
             }
         }
     }
+    
+    func deleteContact(contact: KIITFContact, callback: @escaping (_ requestSuccess: Bool) -> Void) {
+        
+        print("Executing deleteContact()")
+        
+        let deleteContactURLString = rootURLString + "/contacts/" + contact.id + "/"
+        let crsfURLString = rootURLString
+        
+        print(deleteContactURLString)
+        
+        performWithCSRFToken(crsfURLString){ (csrfToken: String) -> Void in
+            
+            print("performing delete w/ CSRF Token")
+            
+            let myParameters: [String: Any] = [
+                "csrfmiddlewaretoken": csrfToken
+            ]
+            
+            print(myParameters)
+            
+            Alamofire.request(deleteContactURLString, method: .delete, parameters: myParameters, encoding: URLEncoding.default, headers: ["referer": crsfURLString, "origin": crsfURLString, "x-csrftoken": csrfToken])
+                .validate()
+                .responseData { response in
+                    
+                    print("request.result.debugdescription : \(response.debugDescription)")
+                    
+                    if let data = response.result.value, let utf8Text = String(data: data, encoding: .utf8) {
+                        print("Data: \(utf8Text)")
+                    }
+                    
+                    guard response.result.isSuccess else {
+                        print("error deleting contact \(contact.name)")
+                        callback(false)
+                        return
+                    }
+                    
+                    print("contact deleted")
+                    callback(true)
+            }
+        }
+    }
+
 
 }

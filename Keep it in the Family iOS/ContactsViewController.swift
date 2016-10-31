@@ -60,6 +60,7 @@ class ContactsViewController: UITableViewController, NSFetchedResultsControllerD
                 let distinationController = (segue.destination as! UINavigationController).topViewController as! ShowContactViewController
                 distinationController.contact = contact
                 distinationController.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem
+                distinationController.navigationItem.leftBarButtonItem?.title = "Contacts"
                 distinationController.navigationItem.leftItemsSupplementBackButton = true
             }
         }

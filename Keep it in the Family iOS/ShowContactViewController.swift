@@ -10,10 +10,6 @@ import UIKit
 
 class ShowContactViewController: UITableViewController {
     
-    @IBAction func editContact(_ sender: AnyObject) {
-        performSegue(withIdentifier: "editContactFormSegue", sender: nil)
-    }
-    
     let sections = KIITFContactSectionInfo()
     
     var contact: KIITFContact? {
@@ -22,14 +18,28 @@ class ShowContactViewController: UITableViewController {
         }
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        configureView()
+    }
+    
     func configureView() {
-        if let contact: KIITFContact = self.contact {
-            self.tableView.reloadData()
-            self.navigationItem.title = contact.name
+        self.tableView.reloadData()
+        self.navigationItem.title = contact?.name ?? ""
+        if contact != nil {
+            let editBarButton = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(ShowContactViewController.editContact))
+            self.navigationItem.rightBarButtonItem = editBarButton
         }
     }
     
+    func editContact() {
+        performSegue(withIdentifier: "editContactFormSegue", sender: nil)
+    }
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
+        guard contact != nil else {
+            return 0
+        }
         return sections.names.count
     }
     
@@ -68,11 +78,7 @@ class ShowContactViewController: UITableViewController {
         return false
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = 140
-    }
+
 
     // MARK: - Segues
     
