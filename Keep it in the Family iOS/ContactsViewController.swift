@@ -37,11 +37,6 @@ class ContactsViewController: UITableViewController, NSFetchedResultsControllerD
             self.tableView.reloadData()
         }
     }
-
-    override func viewWillAppear(_ animated: Bool) {
-        self.clearsSelectionOnViewWillAppear = self.splitViewController!.isCollapsed
-        super.viewWillAppear(animated)
-    }
     
     func addContact() {
         performSegue(withIdentifier: "newContactSegue", sender: nil)
@@ -54,10 +49,10 @@ class ContactsViewController: UITableViewController, NSFetchedResultsControllerD
     // MARK: - Segues
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showDetail" {
+        if segue.identifier == "showContactSegue" {
             if let indexPath = self.tableView.indexPathForSelectedRow {
                 let contact = contacts?[indexPath.row]
-                let distinationController = (segue.destination as! UINavigationController).topViewController as! ShowContactViewController
+                let distinationController = segue.destination as! ShowContactViewController
                 distinationController.contact = contact
                 distinationController.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem
                 distinationController.navigationItem.leftBarButtonItem?.title = "Contacts"
@@ -95,6 +90,10 @@ class ContactsViewController: UITableViewController, NSFetchedResultsControllerD
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
         return false
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "showContactSegue", sender: nil)
     }
    
     func configureCell(cell: UITableViewCell, contact: KIITFContact) {
