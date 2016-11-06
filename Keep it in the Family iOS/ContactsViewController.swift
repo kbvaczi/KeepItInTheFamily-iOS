@@ -11,9 +11,7 @@ import CoreData
 
 class ContactsViewController: UITableViewController, NSFetchedResultsControllerDelegate {
 
-    @IBAction func unwindToContacts(segue: UIStoryboardSegue) {
-        
-    }
+    @IBAction func unwindToContacts(segue: UIStoryboardSegue) {}
     
     let connection = KIITFConnection()
     var contacts: [KIITFContact]? = nil {
@@ -26,7 +24,7 @@ class ContactsViewController: UITableViewController, NSFetchedResultsControllerD
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        let rightBarButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(ContactsViewController.addContact))
+        let rightBarButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(ContactsViewController.presentNewContactForm))
         self.navigationItem.rightBarButtonItem = rightBarButton
     }
     
@@ -46,27 +44,16 @@ class ContactsViewController: UITableViewController, NSFetchedResultsControllerD
         }
     }
     
-    func addContact() {
+    func presentNewContactForm() {
         performSegue(withIdentifier: "newContactSegue", sender: nil)
+    }
+    
+    func addNewContact(contact: KIITFContact) {
+        self.contacts?.append(contact)
     }
     
     func showLoginScreen() {
         performSegue(withIdentifier: "loginSegue", sender: nil)
-    }
-
-    // MARK: - Segues
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showContactSegue" {
-            if let indexPath = self.tableView.indexPathForSelectedRow {
-                let contact = contacts?[indexPath.row]
-                let distinationController = segue.destination as! ShowContactViewController
-                distinationController.contact = contact
-                distinationController.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem
-                distinationController.navigationItem.leftBarButtonItem?.title = "Contacts"
-                distinationController.navigationItem.leftItemsSupplementBackButton = true
-            }
-        }
     }
 
     // MARK: - Table View
@@ -111,6 +98,27 @@ class ContactsViewController: UITableViewController, NSFetchedResultsControllerD
         dateFormatter.dateStyle = DateFormatter.Style.medium
         let nextCommunicationDateString = dateFormatter.string(from: contact.nextCommunicationDate as Date)
         cell.detailTextLabel?.text = "next check-in: " + nextCommunicationDateString + " (" + contact.communicationFrequency.rawValue + ")"
+    }    
+    
+    // MARK: - Navigation
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showContactSegue" {
+            if let indexPath = self.tableView.indexPathForSelectedRow {
+                let contact = contacts?[indexPath.row]
+                let distinationController = segue.destination as! ShowContactViewController
+                distinationController.contact = contact
+                distinationController.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem
+                distinationController.navigationItem.leftBarButtonItem?.title = "Contacts"
+                distinationController.navigationItem.leftItemsSupplementBackButton = true
+            }
+        } else if segue.identifier == "newContactSegue" {
+            guard   let destinationNVC = segue.destination as? UINavigationController,
+                    let newContactVC = destinationNVC.childViewControllers.first as? NewContactFormViewController else {
+                return
+            }
+            newContactVC.contactsViewController = self
+        }
     }
     
 }

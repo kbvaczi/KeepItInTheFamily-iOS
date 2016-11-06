@@ -10,7 +10,9 @@ import UIKit
 import Eureka
 
 class NewContactFormViewController: ContactsFormViewController {
-
+    
+    var contactsViewController: ContactsViewController?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -37,6 +39,10 @@ class NewContactFormViewController: ContactsFormViewController {
         connection.createContact(contact: contactUnwrapped) { (requestSuccess: Bool) -> Void in
             if requestSuccess {
                 print("successfully created contact")
+                if self.contactsViewController != nil {
+                    self.contactsViewController?.addNewContact(contact: self.contact!)
+                    print("wrote contacts")
+                }
                 self.dismiss(animated: true, completion: nil)
             } else {
                 print("error creating contact")
@@ -45,15 +51,4 @@ class NewContactFormViewController: ContactsFormViewController {
 
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
