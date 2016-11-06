@@ -63,8 +63,7 @@ class EditContactFormViewController: ContactsFormViewController {
         
         connection.deleteContact(contact: contactUnwrapped) { (wasSuccessful) -> Void in
             if wasSuccessful {
-                (self.presentingViewController as? ShowContactViewController)?.contact = nil
-                self.dismiss(animated: true, completion: nil)
+                self.performSegue(withIdentifier: "unwindToContacts", sender: nil)
             } else {
                 let alert = UIAlertController(title: "Oops!", message: "We were unable to delete this contact. Please try again later.", preferredStyle: UIAlertControllerStyle.alert)
                 alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
@@ -72,5 +71,24 @@ class EditContactFormViewController: ContactsFormViewController {
             }
         }
     }
+    
+    
+    // MARK: - Navigation
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destinationViewController.
+        guard   segue.identifier == "unwindToContacts",
+                let destinationVC = segue.destination as? ContactsViewController,
+                destinationVC.contacts != nil else {
+            return
+        }
+        // Delete the contact from list of contacts
+        for (index, contact) in destinationVC.contacts!.enumerated() {
+            if contact.id == self.contact?.id {
+                destinationVC.contacts?.remove(at: index)
+            }
+        }
+    }
+    
     
 }

@@ -11,8 +11,16 @@ import CoreData
 
 class ContactsViewController: UITableViewController, NSFetchedResultsControllerDelegate {
 
+    @IBAction func unwindToContacts(segue: UIStoryboardSegue) {
+        
+    }
+    
     let connection = KIITFConnection()
-    var contacts: [KIITFContact]? = nil
+    var contacts: [KIITFContact]? = nil {
+        didSet {
+            self.tableView.reloadData()
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
