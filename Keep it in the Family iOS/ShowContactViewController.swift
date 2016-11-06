@@ -20,6 +20,8 @@ class ShowContactViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.estimatedRowHeight = 70
+        tableView.rowHeight = UITableViewAutomaticDimension
         configureView()
     }
     
@@ -48,24 +50,39 @@ class ShowContactViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return sections.numberRowsInSection[section]
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        var cell = UITableViewCell()
         if let contact: KIITFContact = self.contact {
             switch indexPath.section {
-            case sections.sectionNumberForName(name: "Name"):
+            case sections.sectionNumberForDescription(desc: "Name"):
+                cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
                 cell.textLabel?.text = contact.name
-            case sections.sectionNumberForName(name: "Communication Frequency"):
-                cell.textLabel?.text = contact.communicationFrequency.rawValue.capitalized
-            case sections.sectionNumberForName(name: "Last Contact"):
-                let dateFormatter = DateFormatter()
-                dateFormatter.dateStyle = DateFormatter.Style.medium
-                let lastCommunicationDateString = dateFormatter.string(from: contact.lastCommunicationDate)
-                cell.textLabel?.text = lastCommunicationDateString
-            case sections.sectionNumberForName(name: "Notes"):
-                cell.textLabel?.text = contact.notes
+                cell.detailTextLabel?.text = nil
+            case sections.sectionNumberForDescription(desc: "Communication Details"):
+                cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+                switch indexPath.row {
+                case 0:
+                    cell.textLabel?.text = "Frequency"
+                    cell.detailTextLabel?.text = contact.communicationFrequency.rawValue.capitalized
+                case 1:
+                    cell.textLabel?.text = "Last Check-in"
+                    let dateFormatter = DateFormatter()
+                    dateFormatter.dateStyle = DateFormatter.Style.medium
+                    let lastCommunicationDateString = dateFormatter.string(from: contact.lastCommunicationDate)
+                    cell.detailTextLabel?.text = lastCommunicationDateString
+                default:
+                    cell.textLabel?.text = "Next Check-in"
+                    let dateFormatter = DateFormatter()
+                    dateFormatter.dateStyle = DateFormatter.Style.medium
+                    let nextCommunicationDateString = dateFormatter.string(from: contact.nextCommunicationDate)
+                    cell.detailTextLabel?.text = nextCommunicationDateString
+                }
+            case sections.sectionNumberForDescription(desc: "Notes"):
+                cell = tableView.dequeueReusableCell(withIdentifier: "TextViewCell", for: indexPath) as! TextViewTableViewCell
+                (cell as? TextViewTableViewCell)?.textView.text = contact.notes
             default:
                 break
             }
@@ -97,4 +114,21 @@ class ShowContactViewController: UITableViewController {
         }
     }
 }
+
+class KIITFContactSectionInfo {
+    let description = ["Name", "Communication Details", "Notes"]
+    let names = ["", "Communication Details", "Notes"]
+    let numberRowsInSection = [1,3,1]
+    
+    func sectionNumberForDescription(desc: String) -> Int {
+        return description.index(of: desc) ?? 99
+    }
+}
+
+class TextViewTableViewCell: UITableViewCell {
+    
+    @IBOutlet weak var textView: UITextView!
+    
+}
+
 

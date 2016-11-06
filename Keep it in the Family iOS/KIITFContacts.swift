@@ -112,11 +112,3 @@ enum CommunicationFrequency: String {
         }
     }
 }
-
-class KIITFContactSectionInfo {
-    let names = ["Name", "Communication Frequency", "Last Contact", "Notes"]
-    
-    func sectionNumberForName(name: String) -> Int {
-        return names.index(of: name) ?? 99
-    }
-}
