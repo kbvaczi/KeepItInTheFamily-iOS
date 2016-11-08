@@ -33,15 +33,7 @@ class ContactsViewController: UITableViewController, NSFetchedResultsControllerD
             showLoginScreen()
             return
         }
-        
-        connection.getContacts() { (contacts: [KIITFContact]?, isSuccessful: Bool) -> Void in
-            guard isSuccessful == true else {
-                self.showLoginScreen()
-                return
-            }
-            self.contacts = contacts
-            self.tableView.reloadData()
-        }
+        configureView()
     }
     
     func presentNewContactForm() {
@@ -54,6 +46,16 @@ class ContactsViewController: UITableViewController, NSFetchedResultsControllerD
     
     func showLoginScreen() {
         performSegue(withIdentifier: "loginSegue", sender: nil)
+    }
+    
+    func configureView() {
+        connection.getContacts() { (contacts: [KIITFContact]?, isSuccessful: Bool) -> Void in
+            guard isSuccessful == true else {
+                self.showLoginScreen()
+                return
+            }
+            self.contacts = contacts
+        }
     }
 
     // MARK: - Table View
@@ -84,8 +86,48 @@ class ContactsViewController: UITableViewController, NSFetchedResultsControllerD
 
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
-        return false
+        return true
     }
+    
+    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        
+        let contact = UITableViewRowAction(style: .normal, title: "Contacted") { action, index in
+            print("contact button tapped")
+            guard var contact = self.contacts?[indexPath.row] else {
+                return
+            }
+            contact.lastCommunicationDate = Date()
+            contact.nextCommunicationDate = contact.nextCommunicationDatePredicted
+            
+            self.connection.updateContact(contact: contact) { (isSuccess) -> Void in
+                self.contacts?[indexPath.row] = contact
+                self.configureView()
+                print("update successful")
+            }
+        }
+        contact.backgroundColor = UIColor.blue
+
+        let delay = UITableViewRowAction(style: .default, title: "Delay") { action, index in
+            print("delay button tapped")
+            guard var contact = self.contacts?[indexPath.row] else {
+                return
+            }
+            contact.nextCommunicationDate = contact.nextCommunicationDate + TimeInterval(CommunicationFrequency.weekly.inSeconds)
+            
+            self.connection.updateContact(contact: contact) { (isSuccess) -> Void in
+                self.contacts?[indexPath.row] = contact
+                self.configureView()
+                print("update successful")
+            }
+        }
+        delay.backgroundColor = UIColor.lightGray
+        
+        return [contact, delay]
+    }
+
+    /*    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        // must implement this method for editActionsForRowAt to work
+    }*/
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier: "showContactSegue", sender: nil)

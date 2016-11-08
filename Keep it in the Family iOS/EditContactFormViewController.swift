@@ -70,8 +70,7 @@ class EditContactFormViewController: ContactsFormViewController {
                 self.present(alert, animated: true, completion: nil)
             }
         }
-    }
-    
+    }    
     
     // MARK: - Navigation
     
