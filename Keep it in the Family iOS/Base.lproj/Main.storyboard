@@ -11,8 +11,8 @@
         <scene sceneID="pY4-Hu-kfo">
             <objects>
                 <navigationController title="Master" id="RMx-3f-FxP" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" systemItem="contacts" id="2B4-rT-IVV"/>
-                    <navigationBar key="navigationBar" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="Pmd-2v-anx">
+                    <tabBarItem key="tabBarItem" title="Contacts" id="2B4-rT-IVV"/>
+                    <navigationBar key="navigationBar" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" id="Pmd-2v-anx">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -98,7 +98,7 @@
         <scene sceneID="fm0-be-ktW">
             <objects>
                 <navigationController id="aYe-3Z-403" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="lqr-By-V3x">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="lqr-By-V3x">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -144,10 +144,10 @@
             </objects>
             <point key="canvasLocation" x="2652" y="-260"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Root Tab Bar Controller-->
         <scene sceneID="Crz-eL-hbs">
             <objects>
-                <tabBarController id="orC-px-MU8" sceneMemberID="viewController">
+                <tabBarController id="orC-px-MU8" customClass="RootTabBarController" customModule="Keep_it_in_the_Family_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" id="RS4-St-IJD">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -237,7 +237,7 @@
         <scene sceneID="7Eo-qm-iD0">
             <objects>
                 <navigationController id="CZK-S0-jHC" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Fyx-qB-Boz">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Fyx-qB-Boz">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -335,12 +335,12 @@
             </objects>
             <point key="canvasLocation" x="1086" y="-1655"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Account-->
         <scene sceneID="u2U-M2-8zv">
             <objects>
                 <navigationController id="AoW-2V-9El" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" systemItem="more" id="dys-5W-goF"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Nfx-uk-4FU">
+                    <tabBarItem key="tabBarItem" title="Account" id="dys-5W-goF"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Nfx-uk-4FU">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

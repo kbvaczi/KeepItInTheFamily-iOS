@@ -137,8 +137,8 @@ class ContactsViewController: UITableViewController, NSFetchedResultsControllerD
         cell.detailTextLabel?.text = "next check-in: " + nextCommunicationDateString + " (" + contact.communicationFrequency.rawValue + ")"
         
         if let swipeCell = cell as? MGSwipeTableCell {
-            let iconForCheckedIn = UIImage.fontAwesomeIcon(name: FontAwesome.check, textColor: UIColor.white, size: CGSize(width: 40, height: 40), backgroundColor: UIColor.clear)
-            let iconForDelay = UIImage.fontAwesomeIcon(name: FontAwesome.clockO, textColor: UIColor.white, size: CGSize(width: 40, height: 40), backgroundColor: UIColor.clear)
+            let iconForCheckedIn = UIImage.fontAwesomeIcon(name: FontAwesome.check, textColor: UIColor.white, size: CGSize(width: 35, height: 35))
+            let iconForDelay = UIImage.fontAwesomeIcon(name: FontAwesome.clockO, textColor: UIColor.white, size: CGSize(width: 35, height: 35))
             let checkedInButton = MGSwipeButton(title: "", icon: iconForCheckedIn, backgroundColor: UIColor.blue, callback: {
                 (sender: MGSwipeTableCell!) -> Bool in
                 print("contact button tapped")
