@@ -14,7 +14,17 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Locksmith.xcscheme</key>
+		<key>FontAwesome.swift-FontAwesome.swift.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>FontAwesome.swift.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>MGSwipeTableCell.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -32,12 +42,17 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>32536C27660F3047822F7018D7564F8A</key>
+		<key>1FE2578FF0805299395CF2A0206BB671</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>488C4F7F8985D7718F716E5A58B3BA39</key>
+		<key>446D4E3A91DF601805048EAE5713856F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>4E1263BFF45F6446CF3DE29AE234C893</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -52,7 +67,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>92943306EC8070DF9CD02ECD505D2CD5</key>
+		<key>AB5276F96EC3CFD1D898E9D208FCDBFE</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>EF4F067C2D0E135B80299B089E168BDA</key>
 		<dict>
 			<key>primary</key>
 			<true/>

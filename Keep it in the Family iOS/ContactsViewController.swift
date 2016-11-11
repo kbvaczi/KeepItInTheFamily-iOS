@@ -8,6 +8,8 @@
 
 import UIKit
 import CoreData
+import FontAwesome_swift
+import MGSwipeTableCell
 
 class ContactsViewController: UITableViewController, NSFetchedResultsControllerDelegate {
 
@@ -34,6 +36,32 @@ class ContactsViewController: UITableViewController, NSFetchedResultsControllerD
             return
         }
         configureView()
+    }
+    
+    func checkInContact(_ contact: KIITFContact) {
+        var mutableContact = contact
+        let today = Date()
+        mutableContact.lastCommunicationDate = today
+        mutableContact.nextCommunicationDate = mutableContact.nextCommunicationDatePredicted
+        self.connection.updateContact(contact: mutableContact) { (isSuccess) -> Void in
+            self.configureView()
+            print("update successful")
+        }
+    }
+    
+    func delayContact(_ contact: KIITFContact) {
+        var mutableContact = contact
+        let today = Date()
+        let oneWeek = TimeInterval(CommunicationFrequency.weekly.inSeconds)
+        if mutableContact.nextCommunicationDate <= today {
+            mutableContact.nextCommunicationDate = today + oneWeek
+        } else {
+            mutableContact.nextCommunicationDate = mutableContact.nextCommunicationDate + oneWeek
+        }
+        self.connection.updateContact(contact: mutableContact) { (isSuccess) -> Void in
+            self.configureView()
+            print("update successful")
+        }
     }
     
     func presentNewContactForm() {
@@ -76,58 +104,25 @@ class ContactsViewController: UITableViewController, NSFetchedResultsControllerD
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ContactCell", for: indexPath)
+        
+        let reuseIdentifier = "ContactCell"
+        var cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier) as! MGSwipeTableCell!
+        if cell == nil
+        {
+            cell = MGSwipeTableCell(style: UITableViewCellStyle.subtitle, reuseIdentifier: reuseIdentifier)
+        }
+        
         if let unwrappedContacts = contacts {
             let contact = unwrappedContacts[indexPath.row]
-            configureCell(cell: cell, contact: contact)
+            configureCell(cell: cell!, contact: contact)
         }
-        return cell
-    }
-
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+        
+        return cell!
     }
     
-    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        
-        let contact = UITableViewRowAction(style: .normal, title: "Contacted") { action, index in
-            print("contact button tapped")
-            guard var contact = self.contacts?[indexPath.row] else {
-                return
-            }
-            contact.lastCommunicationDate = Date()
-            contact.nextCommunicationDate = contact.nextCommunicationDatePredicted
-            
-            self.connection.updateContact(contact: contact) { (isSuccess) -> Void in
-                self.contacts?[indexPath.row] = contact
-                self.configureView()
-                print("update successful")
-            }
-        }
-        contact.backgroundColor = UIColor.blue
-
-        let delay = UITableViewRowAction(style: .default, title: "Delay") { action, index in
-            print("delay button tapped")
-            guard var contact = self.contacts?[indexPath.row] else {
-                return
-            }
-            contact.nextCommunicationDate = contact.nextCommunicationDate + TimeInterval(CommunicationFrequency.weekly.inSeconds)
-            
-            self.connection.updateContact(contact: contact) { (isSuccess) -> Void in
-                self.contacts?[indexPath.row] = contact
-                self.configureView()
-                print("update successful")
-            }
-        }
-        delay.backgroundColor = UIColor.lightGray
-        
-        return [contact, delay]
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 50
     }
-
-    /*    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        // must implement this method for editActionsForRowAt to work
-    }*/
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier: "showContactSegue", sender: nil)
@@ -140,6 +135,28 @@ class ContactsViewController: UITableViewController, NSFetchedResultsControllerD
         dateFormatter.dateStyle = DateFormatter.Style.medium
         let nextCommunicationDateString = dateFormatter.string(from: contact.nextCommunicationDate as Date)
         cell.detailTextLabel?.text = "next check-in: " + nextCommunicationDateString + " (" + contact.communicationFrequency.rawValue + ")"
+        
+        if let swipeCell = cell as? MGSwipeTableCell {
+            let iconForCheckedIn = UIImage.fontAwesomeIcon(name: FontAwesome.check, textColor: UIColor.white, size: CGSize(width: 40, height: 40), backgroundColor: UIColor.clear)
+            let iconForDelay = UIImage.fontAwesomeIcon(name: FontAwesome.clockO, textColor: UIColor.white, size: CGSize(width: 40, height: 40), backgroundColor: UIColor.clear)
+            let checkedInButton = MGSwipeButton(title: "", icon: iconForCheckedIn, backgroundColor: UIColor.blue, callback: {
+                (sender: MGSwipeTableCell!) -> Bool in
+                print("contact button tapped")
+                self.checkInContact(contact)
+                return true
+            })
+            let delayButton = MGSwipeButton(title: "", icon: iconForDelay, backgroundColor: UIColor.lightGray, callback: {
+                (sender: MGSwipeTableCell!) -> Bool in
+                print("delay button tapped")
+                self.delayContact(contact)
+                return true
+            })
+
+            swipeCell.rightButtons = [checkedInButton, delayButton]
+            swipeCell.rightSwipeSettings.transition = MGSwipeTransition.drag
+            
+        }
+    
     }    
     
     // MARK: - Navigation
@@ -164,4 +181,3 @@ class ContactsViewController: UITableViewController, NSFetchedResultsControllerD
     }
     
 }
-
