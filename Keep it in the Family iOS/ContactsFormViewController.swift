@@ -15,9 +15,12 @@ class ContactsFormViewController: FormViewController {
     var sourceController: UIViewController?
     let connection = KIITFConnection()
     
+    var activityIndicator = ActivityIndicator()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureForm()
+        activityIndicator.addToView(self.view)
     }
     
     func configureForm() {

@@ -17,6 +17,7 @@
 		BE1BF9DB1DA13FB000BB1AC8 /* KITTFConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1BF9DA1DA13FB000BB1AC8 /* KITTFConnection.swift */; };
 		BE1BF9DD1DA13FB700BB1AC8 /* KIITFContacts.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1BF9DC1DA13FB700BB1AC8 /* KIITFContacts.swift */; };
 		BE1BF9DF1DA13FCB00BB1AC8 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1BF9DE1DA13FCB00BB1AC8 /* LoginViewController.swift */; };
+		BE3A20811DD7591300CBC16F /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3A20801DD7591300CBC16F /* ActivityIndicator.swift */; };
 		BE475F821DBCE94900C2A62F /* ContactsFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE475F811DBCE94900C2A62F /* ContactsFormViewController.swift */; };
 		BE475F841DBCEA6000C2A62F /* NewContactFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE475F831DBCEA6000C2A62F /* NewContactFormViewController.swift */; };
 		BE7198681DD6354A005EA0FD /* RootTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7198671DD6354A005EA0FD /* RootTabBarController.swift */; };
@@ -40,6 +41,7 @@
 		BE1BF9DA1DA13FB000BB1AC8 /* KITTFConnection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KITTFConnection.swift; sourceTree = "<group>"; };
 		BE1BF9DC1DA13FB700BB1AC8 /* KIITFContacts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KIITFContacts.swift; sourceTree = "<group>"; };
 		BE1BF9DE1DA13FCB00BB1AC8 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		BE3A20801DD7591300CBC16F /* ActivityIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
 		BE475F811DBCE94900C2A62F /* ContactsFormViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactsFormViewController.swift; sourceTree = "<group>"; };
 		BE475F831DBCEA6000C2A62F /* NewContactFormViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewContactFormViewController.swift; sourceTree = "<group>"; };
 		BE7198671DD6354A005EA0FD /* RootTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootTabBarController.swift; sourceTree = "<group>"; };
@@ -117,6 +119,7 @@
 				BE82CD1D1DAC603C0098FEBB /* Account */,
 				BE82CD1C1DAC60250098FEBB /* Contacts */,
 				BE7198671DD6354A005EA0FD /* RootTabBarController.swift */,
+				BE3A20801DD7591300CBC16F /* ActivityIndicator.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -285,6 +288,7 @@
 				BE475F821DBCE94900C2A62F /* ContactsFormViewController.swift in Sources */,
 				BE99A0C81DAA913B00385A77 /* AccountViewController.swift in Sources */,
 				BED94AF81DB98BD000CC29D0 /* EditContactFormViewController.swift in Sources */,
+				BE3A20811DD7591300CBC16F /* ActivityIndicator.swift in Sources */,
 				BE1BF9CB1DA13E3E00BB1AC8 /* ShowContactViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

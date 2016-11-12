@@ -18,13 +18,17 @@ class ContactsViewController: UITableViewController, NSFetchedResultsControllerD
     let connection = KIITFConnection()
     var contacts: [KIITFContact]? = nil {
         didSet {
-            self.tableView.reloadData()
+            reloadDataWithAnimation()
         }
     }
+    
+    var activityIndicator = ActivityIndicator()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        activityIndicator.addToView(self.view)
         
         let rightBarButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(ContactsViewController.presentNewContactForm))
         self.navigationItem.rightBarButtonItem = rightBarButton
@@ -43,8 +47,10 @@ class ContactsViewController: UITableViewController, NSFetchedResultsControllerD
         let today = Date()
         mutableContact.lastCommunicationDate = today
         mutableContact.nextCommunicationDate = mutableContact.nextCommunicationDatePredicted
+        activityIndicator.startAnimating()
         self.connection.updateContact(contact: mutableContact) { (isSuccess) -> Void in
             self.configureView()
+            self.activityIndicator.stopAnimating()
             print("update successful")
         }
     }
@@ -58,8 +64,10 @@ class ContactsViewController: UITableViewController, NSFetchedResultsControllerD
         } else {
             mutableContact.nextCommunicationDate = mutableContact.nextCommunicationDate + oneWeek
         }
+        activityIndicator.startAnimating()
         self.connection.updateContact(contact: mutableContact) { (isSuccess) -> Void in
             self.configureView()
+            self.activityIndicator.stopAnimating()
             print("update successful")
         }
     }
@@ -77,13 +85,21 @@ class ContactsViewController: UITableViewController, NSFetchedResultsControllerD
     }
     
     func configureView() {
+        activityIndicator.startAnimating()
         connection.getContacts() { (contacts: [KIITFContact]?, isSuccessful: Bool) -> Void in
+            self.activityIndicator.stopAnimating()
             guard isSuccessful == true else {
                 self.showLoginScreen()
                 return
             }
-            self.contacts = contacts
+            self.contacts = contacts            
         }
+    }
+    
+    func reloadDataWithAnimation() {
+        let range = NSMakeRange(0, self.tableView.numberOfSections)
+        let sections = NSIndexSet(indexesIn: range)
+        self.tableView.reloadSections(sections as IndexSet, with: .automatic)
     }
 
     // MARK: - Table View

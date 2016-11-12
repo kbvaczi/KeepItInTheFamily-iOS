@@ -36,7 +36,9 @@ class NewContactFormViewController: ContactsFormViewController {
             return
         }
         
+        activityIndicator.startAnimating()
         connection.createContact(contact: contactUnwrapped) { (requestSuccess: Bool) -> Void in
+            self.activityIndicator.stopAnimating()
             if requestSuccess {
                 print("successfully created contact")
                 if self.contactsViewController != nil {

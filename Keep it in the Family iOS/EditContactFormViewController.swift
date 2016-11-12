@@ -21,15 +21,16 @@ class EditContactFormViewController: ContactsFormViewController {
                 formIsValid() else {
             return
         }
-        
+        activityIndicator.startAnimating()
         connection.updateContact(contact: contactUnwrapped) { (requestSuccess: Bool) -> Void in
+            self.activityIndicator.stopAnimating()
             if requestSuccess {
                 print("successfully updated contact")
                 (self.sourceController as? ShowContactViewController)?.contact = contactUnwrapped
                 self.dismiss(animated: true, completion: nil)
             } else {
                 print("error updating contact")
-            }
+            }            
         }
     }
     
@@ -61,7 +62,9 @@ class EditContactFormViewController: ContactsFormViewController {
             return
         }
         
+        activityIndicator.startAnimating()
         connection.deleteContact(contact: contactUnwrapped) { (wasSuccessful) -> Void in
+            self.activityIndicator.stopAnimating()
             if wasSuccessful {
                 self.performSegue(withIdentifier: "unwindToContacts", sender: nil)
             } else {
