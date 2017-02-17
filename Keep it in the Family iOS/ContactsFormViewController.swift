@@ -95,7 +95,7 @@ class ContactsFormViewController: FormViewController {
                 row.textAreaHeight = .dynamic(initialTextViewHeight: 110)
                 }.onChange { [weak self] row in
                     self?.contact?.notes = row.value ?? ""
-        }
+                }
     }
     
     func formIsValid() -> Bool {
